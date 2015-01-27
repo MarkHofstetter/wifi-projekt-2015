@@ -1,0 +1,21 @@
+<?php
+
+$env = 'development';
+
+$config_glob_path =  array(
+    sprintf('../../../config/autoload/{,*.}{global,local,%s}.php', $env)
+);
+
+return array(
+    'modules' => array(
+        'Application',
+        'Album',
+    ),
+    'module_listener_options' => array(
+        'config_glob_paths'    => $config_glob_path,
+        'module_paths' => array(
+            'module',
+            'vendor',
+        ),
+    ),
+);

@@ -1,0 +1,129 @@
+    1  curl -sS https://getcomposer.org/installer | php
+    2   php composer.phar update
+    3  ls -lrt
+    4* php composer.phar require zendframework/zend-developer-tools:dev-masterphp composer.phar require zendframework/
+    5   php composer.phar update
+    6  php composer.phar require zendframework/zend-view
+    7  php composer.phar require zendframework/zend-http
+    8  php composer.phar create-project --stability="dev" zendframework/skeleton-application path/to/install
+    9  php composer.phar create-project --stability="dev" zendframework/skeleton-app demo
+   10  php composer.phar create-project zendframework/skeleton-app demo
+   11  php composer.phar create-project --stability="dev" zendframework/skeleton-application demo
+   12  cd demo/public/
+   13  ls
+   14  cd ..
+   15  php composer.phar self-update
+   16  cd module/
+   17  ls
+   18  ls -R Application/
+   19  cd ../..
+   20  find .
+   21  cd demo/
+   22  ls
+   23  cd module/
+   24  find 
+   25  tree.com Application/
+   26  ls -R
+   27  mv Application/ Album
+   28  find .
+   29  ls -r
+   30  ls -R
+   31  pwd
+   32  cd ..
+   33  cd ..
+   34  rm -rf module
+   35  ls -rlt
+   36  rm -rf demo
+   37  php composer.phar create-project --stability="dev" zendframework/skeleton-application demo
+   38  cd demo
+   39  cd module
+   40  mkdir Album 
+   41  cd Album/
+   42  mkdir config
+   43  mkdir src
+   44  mkdir view
+   45  mkdir -r view/album/album
+   46  mkdir -p view/album/album
+   47  mkdir -p src/Album/Controller
+   48  mkdir -p src/Album/Form
+   49  mkdir -p src/Album/Model
+   50  cd ../../
+   51  pwd
+   52  ls
+   53  cd module/
+   54  ls
+   55  git init
+   56  git add -A
+   57  git commit -m 'initial'
+   58  git config --global user.email 'mark@hofstetter.at'
+   59  git config --global user.name 'Mark Hofstetter'
+   60  rm -rf Application/
+   61  git log
+   62  git log -m
+   63  pwd
+   64  cd ../../
+   65  php composer.phar create-project --stability="dev" zendframework/skeleton-application demo2
+   66  mv demo2/module/Application/ demo/module/
+   67  rm -rf demo2
+   68  cd demo/
+   69  ls
+   70  ls module/
+   71  ls
+   72  pwd
+   73  git commit -m 'initial'
+   74  pwd
+   75  ls
+   76  ls- rlt
+   77  ls -rlt 
+   78  git init
+   79  git add -A
+   80  git commit -m 'initial'
+   81  cd module/
+   82  ls -lrt
+   83  rm -rf Application/
+   84  ls
+   85  grep -R Application *
+   86  grep -r Application *
+   87  grep -r Application *
+   88  git log
+   89  git log -n
+   90  git log -n1
+   91  git reset
+   92  ls -lrt
+   93  cd ..
+   94  pwd
+   95  cd ..
+   96  php composer.phar create-project --stability="dev" zendframework/skeleton-application demo2
+   97  cp -R demo2/module/Application/ demo/module/
+   98  git status
+   99  cd demo
+  100  git status
+  101  git add -A
+  102  git commit -m 'testing'
+  103  git log
+  104  cd module/
+  105  mv Album/config/application.config.php Application/config/
+  106  find
+  107  find Application/
+  108  find Application/ | grep application
+  109  cd ../../demo2/module/Application/config/
+  110  ls
+  111  cd ..
+  112  cd ..
+  113  cd Application/
+  114  grep -r application.config.php *
+  115  cd ..
+  116  grep -r application.config.php *
+  117  grep -r module.config.php *
+  118  cd ../../demo
+  119  composer.phar require zendframework/zend-developer-tools:dev-master
+  120  php composer.phar require doctrine/doctrine-orm-module
+  121  ls -lrt
+  122  cp vendor/zendframework/zend-developer-tools/config/zenddevelopertools.local.php.dist config/autoload/zdt.local.php
+  123  ./vendor/bin/doctrine-module orm:validate-schema
+  124  ./vendor/bin/doctrine-module orm:schema-tool:create
+  125  git status
+  126  git add -A 
+  127  git commit -m 'working with doctrine'
+  128  history 
+  129  history  > INSTALL.log

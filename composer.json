@@ -1,0 +1,7 @@
+{
+    "require": {
+        "zendframework/zend-developer-tools": "dev-master",
+        "zendframework/zend-view": "~2.3",
+        "zendframework/zend-http": "~2.3"
+    }
+}
