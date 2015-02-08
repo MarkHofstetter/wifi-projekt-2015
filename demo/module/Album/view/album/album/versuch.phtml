@@ -1,0 +1,30 @@
+<?php
+ // module/Album/view/album/album/versuch.phtml:
+
+ $title = 'Die Versuche';
+ $this->headTitle($Karnickel);
+ echo getenv('APP_ENV');
+ ?>
+ <h1><?php echo $this->escapeHtml($Karnickel); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('versuch', array('action'=>'add'));?>">Neuen Versuch hinzuf&uuml;gen</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Versuchsname</th>
+     
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($karnickels as $karnickel) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($karnickel->getKarnickel());?></td>
+     <td>
+         <a href="<?php echo $this->url('versuch',
+             array('action'=>'edit', 'id' => $karnickel->getId()));?>">Bearbeiten</a>
+         <a href="<?php echo $this->url('versuch',
+             array('action'=>'delete', 'id' => $karnickel->getId()));?>">Löschen</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>
