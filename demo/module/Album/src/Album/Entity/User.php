@@ -12,6 +12,17 @@ class User {
 
     /** @ORM\Column(type="string") */
     protected $fullName;
+	
+    
+	
+	// /**
+	// * @ManyToOne(targetEntity="Gender")
+    //  * @JoinColumn(name="gender_id", referencedColumnName="id")
+	// */
+	
+	
+	
+	protected $gender;
 
     function getFullName() {
        return $this->fullName;
@@ -19,6 +30,14 @@ class User {
 
     function setFullName($value) {
        $this->fullName = $value;
+    }
+	
+	function getGender() {
+       return $this->gender;
+    }
+
+    function setGender($value) {
+       $this->gender = $value;
     }
 
     function getId() {

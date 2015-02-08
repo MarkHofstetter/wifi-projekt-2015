@@ -20,6 +20,44 @@ use Album\Form\AlbumForm;
              'albums' => $albums,
        ));
      }
+	 
+	 public function album2Action()
+     {
+       $objectManager = $this
+         ->getServiceLocator()
+         ->get('Doctrine\ORM\EntityManager');
+
+       $albums = $objectManager->getRepository('Album\Entity\Album')->findAll();
+       return new ViewModel(array(
+             'albums' => $albums,
+       ));
+     }
+	 
+	 public function userAction()
+     {
+       $objectManager = $this
+         ->getServiceLocator()
+         ->get('Doctrine\ORM\EntityManager');
+
+       $users = $objectManager->getRepository('Album\Entity\User')->findAll();
+       return new ViewModel(array(
+             'users' => $users,
+       ));
+     }
+	 
+	 public function versuchAction()
+     {
+       $objectManager = $this
+         ->getServiceLocator()
+         ->get('Doctrine\ORM\EntityManager');
+
+       $karnickels = $objectManager->getRepository('Album\Entity\Versuch')->findAll();
+       return new ViewModel(array(
+             'karnickels' => $karnickels,
+       ));
+     }
+	 
+	 
 
      public function addAction()
      {
@@ -152,5 +190,11 @@ use Album\Form\AlbumForm;
      {
          return array('title'    => 'Fuffy');	   
      }
-
+	 
+	  public function birgitAction()
+     {
+         return array('title'    => 'Birgit!');	   
+     }
+	 
+	 
  }
