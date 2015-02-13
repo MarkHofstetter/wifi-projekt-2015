@@ -2,7 +2,8 @@
 return array(
      'controllers' => array(
          'invokables' => array(
-             'Album\Controller\Album' => 'Album\Controller\AlbumController',
+#             'Album\Controller\Album' => 'Album\Controller\AlbumController',
+             'bumsti' => 'Album\Controller\AlbumController',
          ),
      ),
      'router' => array(
@@ -16,7 +17,8 @@ return array(
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
-                         'controller' => 'Album\Controller\Album',
+ #                        'controller' => 'Album\Controller\Album',
+                         'controller' => 'bumsti',
                          'action'     => 'index',
                      ),
                  ),

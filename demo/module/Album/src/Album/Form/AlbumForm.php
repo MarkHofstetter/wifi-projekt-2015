@@ -29,6 +29,13 @@
                  'label' => 'Artist',
              ),
          ));
+		 $this->add(array(
+             'name' => 'besttrack',
+             'type' => 'Text',
+             'options' => array(
+                 'label' => 'Best Track',
+             ),
+         ));
          $this->add(array(
              'name' => 'submit',
              'type' => 'Submit',

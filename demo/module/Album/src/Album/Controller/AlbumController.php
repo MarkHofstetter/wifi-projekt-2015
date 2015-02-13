@@ -20,7 +20,7 @@ use Album\Form\AlbumForm;
              'albums' => $albums,
        ));
      }
-
+	 
      public function addAction()
      {
          $form = new AlbumForm();
@@ -33,7 +33,7 @@ use Album\Form\AlbumForm;
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
-             	   $objectManager = $this
+             	 $objectManager = $this
                     ->getServiceLocator()
                     ->get('Doctrine\ORM\EntityManager');
 
@@ -45,7 +45,7 @@ use Album\Form\AlbumForm;
                 $objectManager->persist($ae);
                 $objectManager->flush();
                  // Redirect to list of albums
-                 return $this->redirect()->toRoute('album');
+                return $this->redirect()->toRoute('album');
              }
          }
          return array('form' => $form);
@@ -89,18 +89,11 @@ use Album\Form\AlbumForm;
              $form->setInputFilter($album->getInputFilter());
              $form->setData($request->getPost());
 
-             if ($form->isValid()) {
-                #$this->getAlbumTable()->saveAlbum($album);
-				$data = $form->getData();
-				#echo $data->title;
-                #$ae->setTitle($data->title);
-                #$ae->setArtist($data->artist);
-                #exit;
+             if ($form->isValid()) {                
+				$data = $form->getData();				
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-
-                 // Redirect to list of albums
-                 return $this->redirect()->toRoute('album');
+                return $this->redirect()->toRoute('album');
              }
          }
 
@@ -125,7 +118,8 @@ use Album\Form\AlbumForm;
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $album = $objectManager->find('Album\Entity\Album', $id);  # vereinfachte Suche - geht nur für Suche nach id				   
+         $album = $objectManager->find('Album\Entity\Album', $id);  
+		 # vereinfachte Suche - geht nur für Suche nach id				   
 		 #echo "Id $id". $album->getTitle() ;
 
          $request = $this->getRequest();
