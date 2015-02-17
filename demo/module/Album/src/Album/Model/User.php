@@ -6,24 +6,25 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Versuch implements InputFilterAwareInterface
+class User implements InputFilterAwareInterface
 {
     public $id;
-    public $karnickel;
+    public $fullname;
+    public $gender_id;
     protected $Entity;
 	protected $inputFilter;
 
-	function __construct($ka) {
-	  if (empty($ka)) {
+	function __construct($us) {
+	  if (empty($us)) {
 	     return;
 	  }	
-	  $this->id = $ka->getId();
-	  $this->karnickel = $ka->getKarnickel();
-	  $this->Entity = $ka;
+	  $this->id = $us->getId();
+	  $this->fullname = $us->getFullname();
+	  $this->Entity = $us;
 	}
 	
 	function getEntity() {	   
-	   $this->Entity->setKarnickel($this->Karnickel);
+	   $this->Entity->setFullname($this->fullname);
 	   return $this->Entity;
     }	   
 	
@@ -31,7 +32,8 @@ class Versuch implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
-        $this->karnickel = (isset($data['karnickel'])) ? $data['karnickel'] : null;
+        $this->fullname = (isset($data['fullname'])) ? $data['fullname'] : null;
+
     }
 	
 	/*
@@ -75,27 +77,10 @@ class Versuch implements InputFilterAwareInterface
                 ),
             ));
 
-            $inputFilter->add(array(
-                'name'     => 'karnickel',
-                'required' => true,
-                'filters'  => array(
-                    array('name' => 'StripTags'),
-                    array('name' => 'StringTrim'),
-                ),
-                'validators' => array(
-                    array(
-                        'name'    => 'StringLength',
-                        'options' => array(
-                            'encoding' => 'UTF-8',
-                            'min'      => 1,
-                            'max'      => 100,
-                        ),
-                    ),
-                ),
-            ));
+            
 
             $inputFilter->add(array(
-                'name'     => 'title',
+                'name'     => 'fullname',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),

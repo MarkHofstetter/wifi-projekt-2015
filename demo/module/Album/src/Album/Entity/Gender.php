@@ -1,19 +1,23 @@
 <?php
 namespace Album\Entity;
+use Doctrine\Common\Collections\ArrayCollections;
 use Doctrine\ORM\Mapping as ORM;
 /** @ORM\Entity */
 class Gender{
+    /**
+    * @ORM\Id
+    * @ORM\GeneratedValue(strategy="AUTO")
+    * @ORM\Column(type="integer")
+    */
+    protected $id;
    
-
     /** @ORM\Column(type="string") */
     protected $gender_name;
 	
-	 /**
-	*@OneToMany(targetEntity="User", mappedBy="Gender")
-	* @JoinColumn(name="id", referencedColumnName="gender_id")
-	*/
-	protected $gender;
-	
+	/**
+	* @ORM\OneToMany(targetEntity="User", mappedBy="Gender")
+	**/
+	protected $genders;
 
     function getGender_name() {
        return $this->gender_name;
@@ -25,11 +29,11 @@ class Gender{
 
     public function getGender()
     {
-        return $this->gender;
+        return $this->genders;
     }
 
     public function setGender($value)
     {
-        $this->gender = $value;
+        $this->genders = $value;
     }
 }

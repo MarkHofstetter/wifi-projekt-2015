@@ -2,6 +2,10 @@
 namespace Album\Model;
 
 // Add these import statements
+
+//Model hat alle Filter drin für die Form, braucht man nicht unbedingt
+//Model kann man gebreuchen um Daten zu validieren und normalisieren
+
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
@@ -13,7 +17,8 @@ class Album implements InputFilterAwareInterface
     public $title;
     protected $Entity;
 	protected $inputFilter;
-
+	
+	//übergeben dem edit Action ein doctrine Entity also die Daten aus der Datenbank
 	function __construct($ae) {
 	  if (empty($ae)) {
 	     return;

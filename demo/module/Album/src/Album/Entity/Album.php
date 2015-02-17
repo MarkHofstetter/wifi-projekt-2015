@@ -16,8 +16,6 @@ class Album {
     /** @ORM\Column(type="string") */
     protected $artist;
 	
-	/** @ORM\Column(type="string") */
-    protected $bewertung;
 
 
     function getTitle() {

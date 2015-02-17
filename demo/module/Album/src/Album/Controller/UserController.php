@@ -1,15 +1,15 @@
 <?php
-
-//Controller soll möglichste klein gehalten werden, Validierung soll im Model sein oder in der Entity
 namespace Album\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Album\Model\Album;
-use Album\Form\AlbumForm;
+use Album\Model\User;
+use Album\Form\UserForm;
 
 
- class AlbumController extends AbstractActionController
+ 
+
+class UserController extends AbstractActionController
  {
      public function indexAction()
      {
@@ -17,27 +17,25 @@ use Album\Form\AlbumForm;
          ->getServiceLocator()
          ->get('Doctrine\ORM\EntityManager');
 
-       $albums = $objectManager->getRepository('Album\Entity\Album')->findAll();
+       $users = $objectManager->getRepository('Album\Entity\User')->findAll();
        return new ViewModel(array(
-             'albums' => $albums,
+             'users' => $users,
        ));
      }
 	 
-	 
+	
 	 
 	 
 
      public function addAction()
      {
-         $form = new AlbumForm();
+         $form = new UserForm();
          $form->get('submit')->setValue('Add');
-		//im get-Kontext:
+
          $request = $this->getRequest();
-		 //post: also Daten schicken über form:
          if ($request->isPost()) {
-			//new Album bezieht sich auf das Model Album:
-             $album = new Album();
-             $form->setInputFilter($album->getInputFilter());
+             $user = new User();
+             $form->setInputFilter($user->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -46,14 +44,13 @@ use Album\Form\AlbumForm;
                     ->get('Doctrine\ORM\EntityManager');
 
                  $data = $form->getData();
-                 $ae = new \Album\Entity\Album();
-                 $ae->setTitle($data['title']);
-                 $ae->setArtist($data['artist']);
+                 $us = new \Album\Entity\User();
+                 $us->setfullName($data['fullname']);
 
-                $objectManager->persist($ae);
+                $objectManager->persist($us);
                 $objectManager->flush();
                  // Redirect to list of albums
-                 return $this->redirect()->toRoute('album');
+                 return $this->redirect()->toRoute('user');
              }
          }
          return array('form' => $form);
@@ -68,7 +65,7 @@ use Album\Form\AlbumForm;
 
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('album', array(
+             return $this->redirect()->toRoute('user', array(
                  'action' => 'add'
              ));
          }
@@ -77,26 +74,24 @@ use Album\Form\AlbumForm;
          // if it cannot be found, in which case go to the index page.
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ae = $objectManager->find('Album\Entity\Album', $id);
+			 $us = $objectManager->find('Album\Entity\User', $id);
          }
          catch (\Exception $ex) {
-             return $this->redirect()->toRoute('album', array(
-                 'action' => 'index'
+             return $this->redirect()->toRoute('user', array(
+                 'action' => 'user'
              ));
          }
 
-		 $album = new Album($ae);
-         $form  = new AlbumForm();
+		 $user = new User($us);
+         $form  = new UserForm();
 		 #$album->title = $ae->getTitle();
          #$album->artist = $ae->getArtist();
-		 //Nächste Zeile sorgt dafür dass die Daten aus dem Model da sind und noch dazu in den richtigen Feldern der Form sind, 
-		 //das sieht man in den vorigen auskommentierten 2 Zeilen, das Zuordnen der Datn in die Felder
-		 $form->bind($album);
+		 $form->bind($user);
          $form->get('submit')->setAttribute('value', 'Edit');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($album->getInputFilter());
+             $form->setInputFilter($user->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -110,7 +105,7 @@ use Album\Form\AlbumForm;
                 $objectManager->flush();
 
                  // Redirect to list of albums
-                 return $this->redirect()->toRoute('album');
+                 return $this->redirect()->toRoute('user');
              }
          }
 
@@ -130,12 +125,12 @@ use Album\Form\AlbumForm;
 		 # echo "Id $id";
 		 
          if (!$id) {
-             return $this->redirect()->toRoute('album');
+             return $this->redirect()->toRoute('user');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $album = $objectManager->find('Album\Entity\Album', $id);  # vereinfachte Suche - geht nur für Suche nach id				   
+         $user = $objectManager->find('Album\Entity\User', $id);  # vereinfachte Suche - geht nur für Suche nach id				   
 		 #echo "Id $id". $album->getTitle() ;
 
          $request = $this->getRequest();
@@ -144,29 +139,21 @@ use Album\Form\AlbumForm;
 
              if ($del == 'Yes') {
                  $id = (int) $request->getPost('id');
-				 $objectManager->remove($album);     # löschen
+				 $objectManager->remove($user);     # löschen
 				 $objectManager->flush();
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('album');
+             return $this->redirect()->toRoute('user');
          }
 
          return array(
              'id'    => $id,
-             'album' => $album     # in diesem Fall wird einen spezielle Form, nämlich die im View view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
+             'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
 	 
-	 public function fuffyAction()
-     {
-         return array('title'    => 'Fuffy');	   
-     }
 	 
-	  public function birgitAction()
-     {
-         return array('title'    => 'Birgit!');	   
-     }
 	 
 	 
  }

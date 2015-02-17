@@ -10,7 +10,9 @@
 return array(
     'modules' => array(
          'Application',
-         'Album',                  // <-- Add this line
+         'Album',        
+			'Share',
+			// <-- Add this line
      ),
     'router' => array(
         'routes' => array(

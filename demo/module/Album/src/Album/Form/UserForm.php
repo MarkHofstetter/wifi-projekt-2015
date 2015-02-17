@@ -4,11 +4,11 @@
 
  use Zend\Form\Form;
 
- class AlbumForm extends Form
+ class UserForm extends Form
  {
      public function __construct($name = null)
      {
-         // we want to ignore the name passed: Die Form hat keinen Namen, beim Aufruf der Form sind alle Felder aufgebaut, deswegen construct
+         // we want to ignore the name passed
          parent::__construct('album');
 
          $this->add(array(
@@ -16,19 +16,13 @@
              'type' => 'Hidden',
          ));
          $this->add(array(
-             'name' => 'title',
+             'name' => 'fullname',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Title',
+                 'label' => 'Name',
              ),
          ));
-         $this->add(array(
-             'name' => 'artist',
-             'type' => 'Text',
-             'options' => array(
-                 'label' => 'Artist',
-             ),
-         ));
+         
          $this->add(array(
              'name' => 'submit',
              'type' => 'Submit',
