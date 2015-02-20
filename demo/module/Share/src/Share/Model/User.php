@@ -1,5 +1,5 @@
 <?php
-namespace Album\Model;
+namespace Share\Model;
 
 // Add these import statements
 use Zend\InputFilter\InputFilter;
@@ -9,8 +9,9 @@ use Zend\InputFilter\InputFilterInterface;
 class Album implements InputFilterAwareInterface
 {
     public $id;
-    public $artist;
-    public $title;
+    public $first_name;
+    public $last_name;
+	public $gender;
     protected $Entity;
 	protected $inputFilter;
 
@@ -19,14 +20,16 @@ class Album implements InputFilterAwareInterface
 	     return;
 	  }	
 	  $this->id = $ae->getId();
-	  $this->title = $ae->getTitle();
-      $this->artist = $ae->getArtist(); 
+	  $this->first_name = $ae->getFirstName();
+      $this->last_name = $ae->getLastName(); 
+	  $this->gender = $ae->getGender(); 
 	  $this->Entity = $ae;
 	}
 	
 	function getEntity() {	   
-	   $this->Entity->setTitle($this->title);
-       $this->Entity->setArtist($this->artist);
+	   $this->Entity->setFirstName($this->first_name);
+       $this->Entity->setLastName($this->last_name);
+	   $this->Entity->setGender($this->gender);
 	   return $this->Entity;
     }	   
 	
@@ -34,8 +37,8 @@ class Album implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
-        $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
-        $this->title  = (isset($data['title']))  ? $data['title']  : null;
+        $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
+        $this->last_name  = (isset($data['last_name']))  ? $data['last_name']  : null;
     }
 	
 	/*
@@ -80,7 +83,7 @@ class Album implements InputFilterAwareInterface
             ));
 
             $inputFilter->add(array(
-                'name'     => 'artist',
+                'name'     => 'first_name',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -99,7 +102,7 @@ class Album implements InputFilterAwareInterface
             ));
 
             $inputFilter->add(array(
-                'name'     => 'title',
+                'name'     => 'last_name',
                 'required' => true,
                 'filters'  => array(
                     array('name' => 'StripTags'),
@@ -112,6 +115,25 @@ class Album implements InputFilterAwareInterface
                             'encoding' => 'UTF-8',
                             'min'      => 1,
                             'max'      => 100,
+                        ),
+                    ),
+                ),
+            ));
+			
+			$inputFilter->add(array(
+                'name'     => 'gender',
+                'required' => true,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 1,
                         ),
                     ),
                 ),

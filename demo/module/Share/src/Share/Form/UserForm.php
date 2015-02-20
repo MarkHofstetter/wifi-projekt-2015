@@ -1,39 +1,39 @@
 <?php
 
- namespace Album\Form;
+ namespace User\Form;
 
  use Zend\Form\Form;
 
- class AlbumForm extends Form
+ class UserForm extends Form
  {
      public function __construct($name = null)
      {
          // we want to ignore the name passed
-         parent::__construct('album');
+         parent::__construct('User');
 
          $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
          ));
          $this->add(array(
-             'name' => 'title',
+             'name' => 'first_name',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Title',
+                 'label' => 'Vorname',
              ),
          ));
          $this->add(array(
-             'name' => 'artist',
+             'name' => 'last_name',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Artist',
+                 'label' => 'Nachname',
              ),
          ));
 		 $this->add(array(
-             'name' => 'besttrack',
+             'name' => 'gender',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Best Track',
+                 'label' => 'Geschlecht m/w',
              ),
          ));
          $this->add(array(

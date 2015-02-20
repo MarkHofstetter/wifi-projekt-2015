@@ -1,13 +1,13 @@
 <?php
-namespace Users\Controller;
+namespace User\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Share\Model\Users;
-use Share\Form\UsersForm;
+use Share\Model\User;
+use Share\Form\UserForm;
 
 
- class UsersController extends AbstractActionController
+ class UserController extends AbstractActionController
  {
      public function indexAction()
      {
@@ -17,18 +17,18 @@ use Share\Form\UsersForm;
 
        $users = $objectManager->getRepository('Share\Entity\Users')->findAll();
        return new ViewModel(array(
-             'user' => $users,
+             'users' => $users,
        ));
      }
 	 
      public function addAction()
      {
-         $form = new UsersForm();
+         $form = new UserForm();
          $form->get('submit')->setValue('Add');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $users = new User();
+             $user = new User();
              $form->setInputFilter($users->getInputFilter());
              $form->setData($request->getPost());
 
@@ -38,15 +38,15 @@ use Share\Form\UsersForm;
                     ->get('Doctrine\ORM\EntityManager');
 
                  $data = $form->getData();
-                 $ue = new \Share\Entity\Users();
-                 $ue->setfirst_name($data['First Name']);
-                 $ue->setlast_name($data['Last Name']);
-				 $ue->setgender($data['Gender']);
+                 $ue = new \Share\Entity\User();
+                 $ue->setFirstName$data['first_name']);
+                 $ue->setLastName($data['last_name']);
+				 $ue->setGender($data['gender']);
                 
 				$objectManager->persist($ue);
                 $objectManager->flush();
                  // Redirect to list of albums
-                return $this->redirect()->toRoute('Users');
+                return $this->redirect()->toRoute('User');
              }
          }
          return array('form' => $form);
@@ -61,7 +61,7 @@ use Share\Form\UsersForm;
 
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('Users', array(
+             return $this->redirect()->toRoute('User', array(
                  'action' => 'add'
              ));
          }
@@ -69,16 +69,16 @@ use Share\Form\UsersForm;
         
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ue = $objectManager->find('Share\Entity\Users', $id);
+			 $ue = $objectManager->find('Share\Entity\User', $id);
          }
          catch (\Exception $ex) {
-             return $this->redirect()->toRoute('Users', array(
+             return $this->redirect()->toRoute('User', array(
                  'action' => 'index'
              ));
          }
 
 		 $users = new User($ue);
-         $form  = new UsersForm();
+         $form  = new UserForm();
 		 #$album->title = $ae->getTitle();
          #$album->artist = $ae->getArtist();
 		 $form->bind($users);
@@ -93,7 +93,7 @@ use Share\Form\UsersForm;
 				$data = $form->getData();				
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-                return $this->redirect()->toRoute('album');
+                return $this->redirect()->toRoute('user');
              }
          }
 
@@ -113,12 +113,12 @@ use Share\Form\UsersForm;
 		 # echo "Id $id";
 		 
          if (!$id) {
-             return $this->redirect()->toRoute('album');
+             return $this->redirect()->toRoute('user');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $album = $objectManager->find('Album\Entity\Album', $id);  
+         $user = $objectManager->find('Share\Entity\User', $id);  
 		 # vereinfachte Suche - geht nur für Suche nach id				   
 		 #echo "Id $id". $album->getTitle() ;
 
@@ -128,23 +128,19 @@ use Share\Form\UsersForm;
 
              if ($del == 'Yes') {
                  $id = (int) $request->getPost('id');
-				 $objectManager->remove($album);     # löschen
+				 $objectManager->remove($user);     # löschen
 				 $objectManager->flush();
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('album');
+             return $this->redirect()->toRoute('user');
          }
 
          return array(
              'id'    => $id,
-             'album' => $album     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
+             'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
 	 
-	 public function fuffyAction()
-     {
-         return array('title'    => 'Fuffy');	   
-     }
 
  }
