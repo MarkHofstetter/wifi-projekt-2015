@@ -10,9 +10,9 @@ $modules = array(
 		'Share',
 );
 
-if ($env == 'development') {
+#if ($env == 'development') {
     $modules[] = 'ZendDeveloperTools';
-}
+#}
 
 $config_glob_path =  array(
     # sprintf('config/autoload/{,*.}{global,%s,local}.php', $env)

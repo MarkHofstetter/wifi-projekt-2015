@@ -1,5 +1,5 @@
 <?php
-return array(
+return array(    
      'controllers' => array(
          'invokables' => array(
              'Share\Controller\Users' => 'Share\Controller\UsersController',
