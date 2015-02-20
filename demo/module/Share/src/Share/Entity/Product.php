@@ -1,7 +1,7 @@
 <?php
 namespace Share\Entity;
 use Doctrine\ORM\Mapping as ORM;
-/** @ORM\Entity @ORM\Table(name="Product") */
+/** @ORM\Entity @ORM\Table(name="Products") */
 class Product {
     /**
     * @ORM\Id
@@ -25,7 +25,7 @@ class Product {
 	protected $lend_products;
 	
 	/**
-	* @ORM\ManyToOne(targetEntity="Users")
+	* @ORM\ManyToOne(targetEntity="User")
 	**/
 	protected $owner;
 

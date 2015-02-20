@@ -1,7 +1,7 @@
 <?php
 namespace Share\Entity;
 use Doctrine\ORM\Mapping as ORM;
-/** @ORM\Entity @ORM\Table(name="Trust") */
+/** @ORM\Entity @ORM\Table(name="Trusts") */
 class Trust {
     /**
     * @ORM\Id
@@ -13,12 +13,12 @@ class Trust {
 	
 	
 	/**
-	* @ORM\ManyToOne(targetEntity="Users")
+	* @ORM\ManyToOne(targetEntity="User")
 	**/
 	protected $me;
 	
 	/**
-	* @ORM\ManyToOne(targetEntity="Users")
+	* @ORM\ManyToOne(targetEntity="User")
 	**/
 	protected $myfriend;
 

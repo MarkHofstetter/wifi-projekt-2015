@@ -19,7 +19,7 @@ class Lend {
 	
 	
 	/**
-	* @ORM\ManyToOne(targetEntity="Users")
+	* @ORM\ManyToOne(targetEntity="User")
 	**/
 	protected $lender;
 	

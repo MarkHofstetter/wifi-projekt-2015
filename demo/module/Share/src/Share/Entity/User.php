@@ -1,8 +1,8 @@
 <?php
 namespace Share\Entity;
 use Doctrine\ORM\Mapping as ORM;
-/** @ORM\Entity */
-class Users {
+/** @ORM\Entity @ORM\Table(name="Users") */
+class User {
     /**
     * @ORM\Id
     * @ORM\GeneratedValue(strategy="AUTO")
@@ -21,22 +21,22 @@ class Users {
     protected $gender;
 	
 	/**
-	* @ORM\OneToMany(targetEntity="Product", mappedBy="Users")
+	* @ORM\OneToMany(targetEntity="Product", mappedBy="User")
 	**/
 	protected $product_users;
 	
 	/**
-	* @ORM\OneToMany(targetEntity="Trust", mappedBy="Users")
+	* @ORM\OneToMany(targetEntity="Trust", mappedBy="User")
 	**/
 	protected $trust_users;
 	
 	/**
-	* @ORM\OneToMany(targetEntity="Trust", mappedBy="Users")
+	* @ORM\OneToMany(targetEntity="Trust", mappedBy="User")
 	**/
 	protected $trusts;
 	
 	/**
-	* @ORM\OneToMany(targetEntity="Lend", mappedBy="Users")
+	* @ORM\OneToMany(targetEntity="Lend", mappedBy="User")
 	**/
 	protected $lend_users;
 
