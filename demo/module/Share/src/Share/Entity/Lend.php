@@ -1,7 +1,7 @@
 <?php
 namespace Share\Entity;
 use Doctrine\ORM\Mapping as ORM;
-/** @ORM\Entity @ORM\Table(name="Lend") */
+/** @ORM\Entity @ORM\Table(name="Lends") */
 class Lend {
     /**
     * @ORM\Id
