@@ -1,5 +1,5 @@
 <?php
-namespace User\Controller;
+namespace Share\Controller;
 
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
