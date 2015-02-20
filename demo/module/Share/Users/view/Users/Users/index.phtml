@@ -1,0 +1,33 @@
+<?php
+ // module/Share/view/share/share/index.phtml:
+
+ $title = 'Produkte leihen und verleihen';
+ $this->headTitle($title);
+ echo getenv('APP_ENV');
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <p>
+     <a href="<?php echo $this->url('users', array('action'=>'add'));?>">Neuen Benutzer hinzuf&uuml;gen</a>
+ </p>
+
+ <table class="table">
+ <tr>
+     <th>Vorname</th>
+     <th>Nachname</th>
+	 <th>Geschlecht</th>
+     <th>&nbsp;</th>
+ </tr>
+ <?php foreach ($userse as $users) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($album->getFirstName());?></td>
+     <td><?php echo $this->escapeHtml($album->getLastName());?></td>
+	  <td><?php echo $this->escapeHtml($album->getGender());?></td>
+     <td>
+         <a href="<?php echo $this->url('users',
+             array('action'=>'edit', 'id' => $users->getId()));?>">Bearbeiten</a>
+         <a href="<?php echo $this->url('users',
+             array('action'=>'delete', 'id' => $users->getId()));?>">L&ouml;schen</a>
+     </td>
+ </tr>
+ <?php endforeach; ?>
+ </table>

@@ -1,32 +1,34 @@
-,<?php
-namespace Album\Model;
+<?php
+namespace Share\Model;
 
 // Add these import statements
 use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Album implements InputFilterAwareInterface
+class Users implements InputFilterAwareInterface
 {
     public $id;
-    public $artist;
-    public $title;
+    public $first_name;
+	public $last_name;
+    public $gender;
     protected $Entity;
 	protected $inputFilter;
 
-	function __construct($ae) {
-	  if (empty($ae)) {
+	function __construct($ue) {
+	  if (empty($ue)) {
 	     return;
 	  }	
-	  $this->id = $ae->getId();
-	  $this->title = $ae->getTitle();
-      $this->artist = $ae->getArtist(); 
-	  $this->Entity = $ae;
+	  $this->id = $ue->getId();
+	  $this->first_name = $ue->getfirst_name();
+      $this->last_name = $ue->getlast_name(); 
+	  $this->gender = $ue->getgender(); 
+	  $this->Entity = $ue;
 	}
 	
 	function getEntity() {	   
-	   $this->Entity->setTitle($this->title);
-       $this->Entity->setArtist($this->artist);
+	   $this->Entity->setfirst_name($this->first_name);
+       $this->Entity->setlast_name($this->last_name);
 	   return $this->Entity;
     }	   
 	
@@ -34,8 +36,9 @@ class Album implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
-        $this->artist = (isset($data['artist'])) ? $data['artist'] : null;
-        $this->title  = (isset($data['title']))  ? $data['title']  : null;
+        $this->first_name = (isset($data['First Name'])) ? $data['First Name'] : null;
+        $this->last_name  = (isset($data['Last Name']))  ? $data['Last Name']  : null;
+		$this->gender  = (isset($data['Gender']))  ? $data['Gender]  : null;
     }
 	
 	/*
