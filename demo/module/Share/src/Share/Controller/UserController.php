@@ -15,12 +15,12 @@ use Share\Form\UserForm;
          ->getServiceLocator()
          ->get('Doctrine\ORM\EntityManager');
 
-       $users = $objectManager->getRepository('Share\Entity\Users')->findAll();
+       $users = $objectManager->getRepository('Share\Entity\User')->findAll();
        return new ViewModel(array(
              'users' => $users,
        ));
      }
-	 
+
      public function addAction()
      {
          $form = new UserForm();
@@ -39,10 +39,10 @@ use Share\Form\UserForm;
 
                  $data = $form->getData();
                  $ue = new \Share\Entity\User();
-                 $ue->setFirstName$data['first_name']);
+                 $ue->setFirstName($data['first_name']);
                  $ue->setLastName($data['last_name']);
 				 $ue->setGender($data['gender']);
-                
+
 				$objectManager->persist($ue);
                 $objectManager->flush();
                  // Redirect to list of albums
@@ -66,7 +66,7 @@ use Share\Form\UserForm;
              ));
          }
 
-        
+
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
 			 $ue = $objectManager->find('Share\Entity\User', $id);
@@ -89,8 +89,8 @@ use Share\Form\UserForm;
              $form->setInputFilter($users->getInputFilter());
              $form->setData($request->getPost());
 
-             if ($form->isValid()) {                
-				$data = $form->getData();				
+             if ($form->isValid()) {
+				$data = $form->getData();
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
                 return $this->redirect()->toRoute('user');
@@ -108,18 +108,18 @@ use Share\Form\UserForm;
          $objectManager = $this
            ->getServiceLocator()
            ->get('Doctrine\ORM\EntityManager');
- 
+
          $id = (int) $this->params()->fromRoute('id', 0);
 		 # echo "Id $id";
-		 
+
          if (!$id) {
              return $this->redirect()->toRoute('user');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $user = $objectManager->find('Share\Entity\User', $id);  
-		 # vereinfachte Suche - geht nur für Suche nach id				   
+         $user = $objectManager->find('Share\Entity\User', $id);
+		 # vereinfachte Suche - geht nur für Suche nach id
 		 #echo "Id $id". $album->getTitle() ;
 
          $request = $this->getRequest();
@@ -141,6 +141,6 @@ use Share\Form\UserForm;
              'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
-	 
+
 
  }

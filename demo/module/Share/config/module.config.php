@@ -1,9 +1,9 @@
 <?php
-return array(    
+return array(
      'controllers' => array(
          'invokables' => array(
-             'Share\Controller\Users' => 'Share\Controller\UsersController',
-			  
+             'Share\Controller\User' => 'Share\Controller\UserController',
+
          ),
      ),
      'router' => array(
@@ -17,7 +17,7 @@ return array(
                          'id'     => '[0-9]+',
                      ),
                      'defaults' => array(
-                         'controller' => 'Share\Controller\Users',
+                         'controller' => 'Share\Controller\User',
                          'action'     => 'index',
                      ),
                  ),
@@ -44,6 +44,5 @@ return array(
          ),
      ),
  );
- 
- 
- 
+
+

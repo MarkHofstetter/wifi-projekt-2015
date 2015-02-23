@@ -7,7 +7,7 @@ $modules = array(
         'DoctrineORMModule',
         'Application',
         'Album',
-		'Share',
+    		'Share',
 );
 
 #if ($env == 'development') {
