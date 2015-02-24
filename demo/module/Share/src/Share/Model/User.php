@@ -6,7 +6,7 @@ use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
 
-class Album implements InputFilterAwareInterface
+class User implements InputFilterAwareInterface
 {
     public $id;
     public $first_name;
@@ -39,6 +39,7 @@ class Album implements InputFilterAwareInterface
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
         $this->first_name = (isset($data['first_name'])) ? $data['first_name'] : null;
         $this->last_name  = (isset($data['last_name']))  ? $data['last_name']  : null;
+		 $this->gender  = (isset($data['gender']))  ? $data['gender']  : null;
     }
 	
 	/*

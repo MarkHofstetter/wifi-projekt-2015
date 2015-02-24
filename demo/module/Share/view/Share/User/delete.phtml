@@ -1,26 +1,26 @@
  <?php
- // module/Album/view/album/album/delete.phtml:
+ // module/Share/view/share/users/delete.phtml:
 
- $title = 'Delete album';
+ $title = 'Mitglied loeschen';
  $this->headTitle($title);
  ?>
- <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <h2><?php echo $this->escapeHtml($title); ?></h2>
 
- <p>Are you sure that you want to delete
-     '<?php echo $this->escapeHtml($album->getTitle()); ?>' by
-     '<?php echo $this->escapeHtml($album->getArtist()); ?>'?
+ <p>Sind Sie sicher dass Sie 
+     '<?php echo $this->escapeHtml($user->getFirstName())." ".$this->escapeHtml($user->getLastName());?>' 
+    loeschen wollen?
  </p>
  <?php
- $url = $this->url('album', array(
+ $url = $this->url('users', array(
      'action' => 'delete',
      'id'     => $this->id,
  ));
  ?>
  <form action="<?php echo $url; ?>" method="post">
  <div>
-     <input type="hidden" name="id" value="<?php echo (int) $album->getId(); ?>" />
-     <input type="submit" name="del" value="Yes" />
-     <input type="submit" name="del" value="No" />
+     <input type="hidden" name="id" value="<?php echo (int) $user->getId(); ?>" />
+     <input type="submit" name="del" value="Ja" />
+     <input type="submit" name="del" value="Nein" />
  </div>
  </form>
 

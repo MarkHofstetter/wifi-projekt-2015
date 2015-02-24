@@ -24,12 +24,14 @@ use Share\Form\UserForm;
      public function addAction()
      {
          $form = new UserForm();
-         $form->get('submit')->setValue('Add');
+        // $form->get('submit')->setValue('Add');
+		 $form->get('submit')->setAttribute('value', 'anlegen');
+		 
 
          $request = $this->getRequest();
          if ($request->isPost()) {
              $user = new User();
-             $form->setInputFilter($users->getInputFilter());
+             $form->setInputFilter($user->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -38,12 +40,12 @@ use Share\Form\UserForm;
                     ->get('Doctrine\ORM\EntityManager');
 
                  $data = $form->getData();
-                 $ue = new \Share\Entity\User();
-                 $ue->setFirstName($data['first_name']);
-                 $ue->setLastName($data['last_name']);
-				 $ue->setGender($data['gender']);
+                 $ae = new \Share\Entity\User();
+                 $ae->setFirstName($data['first_name']);
+                 $ae->setLastName($data['last_name']);
+				 $ae->setGender($data['gender']);
 
-				$objectManager->persist($ue);
+				$objectManager->persist($ae);
                 $objectManager->flush();
                  // Redirect to list of albums
                 return $this->redirect()->toRoute('User');
@@ -69,7 +71,7 @@ use Share\Form\UserForm;
 
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ue = $objectManager->find('Share\Entity\User', $id);
+			 $ae = $objectManager->find('Share\Entity\User', $id);
          }
          catch (\Exception $ex) {
              return $this->redirect()->toRoute('User', array(
@@ -77,16 +79,16 @@ use Share\Form\UserForm;
              ));
          }
 
-		 $users = new User($ue);
+		 $user = new User($ae);
          $form  = new UserForm();
 		 #$album->title = $ae->getTitle();
          #$album->artist = $ae->getArtist();
-		 $form->bind($users);
-         $form->get('submit')->setAttribute('value', 'Edit');
+		 $form->bind($user);
+         $form->get('submit')->setAttribute('value', 'bearbeiten');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($users->getInputFilter());
+             $form->setInputFilter($user->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -124,9 +126,9 @@ use Share\Form\UserForm;
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $del = $request->getPost('del', 'No');
+             $del = $request->getPost('del', 'Nein');
 
-             if ($del == 'Yes') {
+             if ($del == 'Ja') {
                  $id = (int) $request->getPost('id');
 				 $objectManager->remove($user);     # löschen
 				 $objectManager->flush();

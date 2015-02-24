@@ -1,5 +1,5 @@
 <?php
- // module/Share/view/share/share/index.phtml:
+ // module/Share/view/share/users/index.phtml:
 
  $title = 'Produkte leihen und verleihen';
  $this->headTitle($title);
@@ -7,7 +7,7 @@
  ?>
  <h1><?php echo $this->escapeHtml($title); ?></h1>
  <p>
-     <a href="<?php echo $this->url('users', array('action'=>'add'));?>">Neuen Benutzer hinzuf&uuml;gen</a>
+     <a href="<?php echo $this->url('users', array('action'=>'add'));?>">Neues Mitglied hinzuf&uuml;gen</a>
  </p>
 
  <table class="table">
@@ -19,9 +19,9 @@
  </tr>
  <?php foreach ($users as $users) : ?>
  <tr>
-     <td><?php echo $this->escapeHtml($album->getFirstName());?></td>
-     <td><?php echo $this->escapeHtml($album->getLastName());?></td>
-	  <td><?php echo $this->escapeHtml($album->getGender());?></td>
+     <td><?php echo $this->escapeHtml($users->getFirstName());?></td>
+     <td><?php echo $this->escapeHtml($users->getLastName());?></td>
+	  <td><?php echo $this->escapeHtml($users->getGender());?></td>
      <td>
          <a href="<?php echo $this->url('users',
              array('action'=>'edit', 'id' => $users->getId()));?>">Bearbeiten</a>
