@@ -19,7 +19,7 @@
              'name' => 'owner_id',
              'type' => 'Text',
 			  'options' => array(
-                 'label' => 'Eignetuemer',
+                 'label' => 'Eigentuemer',
              ),
          ));
          $this->add(array(
