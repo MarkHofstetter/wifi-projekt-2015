@@ -1,40 +1,39 @@
 <?php
 
- namespace Share\Form;
+ namespace Album\Form;
 
  use Zend\Form\Form;
 
- class ProductForm extends Form
+ class AlbumForm extends Form
  {
      public function __construct($name = null)
      {
          // we want to ignore the name passed
-         parent::__construct('Product');
+         parent::__construct('album');
 
          $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
          ));
-		 
          $this->add(array(
              'name' => 'title',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Bezeichnung',
+                 'label' => 'Title',
              ),
          ));
          $this->add(array(
-             'name' => 'description',
+             'name' => 'artist',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Details',
+                 'label' => 'Artist',
              ),
          ));
 		 $this->add(array(
-             'name' => 'picture',
+             'name' => 'besttrack',
              'type' => 'Text',
              'options' => array(
-                 'label' => 'Bildpfad',
+                 'label' => 'Best Track',
              ),
          ));
          $this->add(array(

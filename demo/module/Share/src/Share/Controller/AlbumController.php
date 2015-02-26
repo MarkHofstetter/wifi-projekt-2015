@@ -1,36 +1,35 @@
 <?php
-namespace Share\Controller;
+namespace Album\Controller;
+
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Share\Model\Product;
-use Share\Form\ProductForm;
+use Album\Model\Album;
+use Album\Form\AlbumForm;
 
- class ProductController extends AbstractActionController
+
+ class AlbumController extends AbstractActionController
  {
-	 public function indexAction()
+     public function indexAction()
      {
        $objectManager = $this
          ->getServiceLocator()
          ->get('Doctrine\ORM\EntityManager');
 
-       $products = $objectManager->getRepository('Share\Entity\Product')->findAll();
+       $albums = $objectManager->getRepository('Album\Entity\Album')->findAll();
        return new ViewModel(array(
-             'products' => $products,
-			 
+             'albums' => $albums,
        ));
-
-	}
+     }
+	 
      public function addAction()
      {
-         $form = new ProductForm();
-        // $form->get('submit')->setValue('Add');
-		 $form->get('submit')->setAttribute('value', 'anlegen');
-		 
+         $form = new AlbumForm();
+         $form->get('submit')->setValue('Add');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $product = new Product();
-             $form->setInputFilter($product->getInputFilter());
+             $album = new Album();
+             $form->setInputFilter($album->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -39,16 +38,14 @@ use Share\Form\ProductForm;
                     ->get('Doctrine\ORM\EntityManager');
 
                  $data = $form->getData();
-                 $ae = new \Share\Entity\Product();
+                 $ae = new \Album\Entity\Album();
                  $ae->setTitle($data['title']);
-                 $ae->setDescription($data['description']);
-				 
-				 $ae->setPicture($data['picture']);
+                 $ae->setArtist($data['artist']);
 
-				$objectManager->persist($ae);
+                $objectManager->persist($ae);
                 $objectManager->flush();
-                 // Redirect to list of products
-                return $this->redirect()->toRoute('Product');
+                 // Redirect to list of albums
+                return $this->redirect()->toRoute('album');
              }
          }
          return array('form' => $form);
@@ -63,39 +60,40 @@ use Share\Form\ProductForm;
 
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('Product', array(
+             return $this->redirect()->toRoute('album', array(
                  'action' => 'add'
              ));
          }
 
-
+         // Get the Album with the specified id.  An exception is thrown
+         // if it cannot be found, in which case go to the index page.
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ae = $objectManager->find('Share\Entity\Product', $id);
+			 $ae = $objectManager->find('Album\Entity\Album', $id);
          }
          catch (\Exception $ex) {
-             return $this->redirect()->toRoute('Product', array(
+             return $this->redirect()->toRoute('album', array(
                  'action' => 'index'
              ));
          }
 
-		 $product = new Product($ae);
-         $form  = new ProductForm();
+		 $album = new Album($ae);
+         $form  = new AlbumForm();
 		 #$album->title = $ae->getTitle();
          #$album->artist = $ae->getArtist();
-		 $form->bind($product);
-         $form->get('submit')->setAttribute('value', 'bearbeiten');
+		 $form->bind($album);
+         $form->get('submit')->setAttribute('value', 'Edit');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($product->getInputFilter());
+             $form->setInputFilter($album->getInputFilter());
              $form->setData($request->getPost());
 
-             if ($form->isValid()) {
-				$data = $form->getData();
+             if ($form->isValid()) {                
+				$data = $form->getData();				
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-                return $this->redirect()->toRoute('product');
+                return $this->redirect()->toRoute('album');
              }
          }
 
@@ -110,39 +108,43 @@ use Share\Form\ProductForm;
          $objectManager = $this
            ->getServiceLocator()
            ->get('Doctrine\ORM\EntityManager');
-
+ 
          $id = (int) $this->params()->fromRoute('id', 0);
 		 # echo "Id $id";
-
+		 
          if (!$id) {
-             return $this->redirect()->toRoute('product');
+             return $this->redirect()->toRoute('album');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $product = $objectManager->find('Share\Entity\Product', $id);
-		 # vereinfachte Suche - geht nur für Suche nach id
+         $album = $objectManager->find('Album\Entity\Album', $id);  
+		 # vereinfachte Suche - geht nur für Suche nach id				   
 		 #echo "Id $id". $album->getTitle() ;
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $del = $request->getPost('del', 'Nein');
+             $del = $request->getPost('del', 'No');
 
-             if ($del == 'Ja') {
+             if ($del == 'Yes') {
                  $id = (int) $request->getPost('id');
-				 $objectManager->remove($product);     # löschen
+				 $objectManager->remove($album);     # löschen
 				 $objectManager->flush();
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('product');
+             return $this->redirect()->toRoute('album');
          }
 
          return array(
              'id'    => $id,
-             'product' => $product     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
+             'album' => $album     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
-
+	 
+	 public function fuffyAction()
+     {
+         return array('title'    => 'Fuffy');	   
+     }
 
  }
