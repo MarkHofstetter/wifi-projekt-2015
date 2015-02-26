@@ -5,7 +5,10 @@
  $this->headTitle($title);
  ?>
  <h2><?php echo $this->escapeHtml($title); ?></h2>
+ <br/><br/>
  <?php
+
+
  $form->setAttribute('action', $this->url('users', array('action' => 'add')));
  $form->prepare();
 
@@ -13,6 +16,6 @@
  echo $this->formHidden($form->get('id'));
  echo $this->formRow($form->get('first_name'));
  echo $this->formRow($form->get('last_name'));
-  echo $this->formRow($form->get('gender'));
+ echo $this->formRow($form->get('gender'));
  echo $this->formSubmit($form->get('submit'));
  echo $this->form()->closeTag();

@@ -1,15 +1,17 @@
 <?php
  // module/Share/view/share/users/index.phtml:
-
- $title = 'Produkte leihen und verleihen';
+ $title = 'Share Mitglieder';
  $this->headTitle($title);
  echo getenv('APP_ENV');
  ?>
- <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <h2><?php echo $this->escapeHtml($title); ?></h2>
  <p>
      <a href="<?php echo $this->url('users', array('action'=>'add'));?>">Neues Mitglied hinzuf&uuml;gen</a>
  </p>
+ 
 
+
+ <br/> <br/>
  <table class="table">
  <tr>
      <th>Vorname</th>

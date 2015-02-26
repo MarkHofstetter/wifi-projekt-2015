@@ -1,25 +1,25 @@
  <?php
- // module/Share/view/share/users/delete.phtml:
+ // module/Share/view/share/products/delete.phtml:
 
- $title = 'Mitglied loeschen';
+ $title = 'Produkt loeschen';
  $this->headTitle($title);
  ?>
+ 
  <h2><?php echo $this->escapeHtml($title); ?></h2>
- <br/><br/>
-
+<br/><br/>
  <p>Sind Sie sicher dass Sie 
-     '<?php echo $this->escapeHtml($user->getFirstName())." ".$this->escapeHtml($user->getLastName());?>' 
+     '<?php echo $this->escapeHtml($product->getTitle());?>' 
     loeschen wollen?
  </p>
  <?php
- $url = $this->url('users', array(
+ $url = $this->url('products', array(
      'action' => 'delete',
      'id'     => $this->id,
  ));
  ?>
  <form action="<?php echo $url; ?>" method="post">
  <div>
-     <input type="hidden" name="id" value="<?php echo (int) $user->getId(); ?>" />
+     <input type="hidden" name="id" value="<?php echo (int) $product->getId(); ?>" />
      <input type="submit" name="del" value="Ja" />
      <input type="submit" name="del" value="Nein" />
  </div>

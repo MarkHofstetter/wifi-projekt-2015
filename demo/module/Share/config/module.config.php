@@ -3,7 +3,7 @@ return array(
      'controllers' => array(
          'invokables' => array(
              'Share\Controller\User' => 'Share\Controller\UserController',
-
+			 'Share\Controller\Product' => 'Share\Controller\ProductController',
          ),
      ),
      'router' => array(
@@ -21,10 +21,29 @@ return array(
                          'action'     => 'index',
                      ),
                  ),
+             ), 
+
+             'products' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/products[/][:action][/:id]',
+                     'constraints' => array(
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Share\Controller\Product',
+                         'action'     => 'index',
+                     ),
+                 ),
              ),
 
          ),
      ),
+	
+	
+
+	 
      'doctrine' => array(
          'driver' => array(
            'application_entities' => array(

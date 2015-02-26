@@ -2,10 +2,10 @@
 namespace Share\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Share\Model\User;
-use Share\Form\UserForm;
+use Share\Model\Product;
+use Share\Form\ProductForm;
 
- class UserController extends AbstractActionController
+ class ProductController extends AbstractActionController
  {
 	 public function indexAction()
      {
@@ -13,24 +13,24 @@ use Share\Form\UserForm;
          ->getServiceLocator()
          ->get('Doctrine\ORM\EntityManager');
 
-       $users = $objectManager->getRepository('Share\Entity\User')->findAll();
+       $products = $objectManager->getRepository('Share\Entity\Product')->findAll();
        return new ViewModel(array(
-             'users' => $users,
+             'products' => $products,
 			 
        ));
 
 	}
      public function addAction()
      {
-         $form = new UserForm();
+         $form = new ProductForm();
         // $form->get('submit')->setValue('Add');
 		 $form->get('submit')->setAttribute('value', 'anlegen');
 		 
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $user = new User();
-             $form->setInputFilter($user->getInputFilter());
+             $product = new Product();
+             $form->setInputFilter($product->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -39,15 +39,16 @@ use Share\Form\UserForm;
                     ->get('Doctrine\ORM\EntityManager');
 
                  $data = $form->getData();
-                 $ae = new \Share\Entity\User();
-                 $ae->setFirstName($data['first_name']);
-                 $ae->setLastName($data['last_name']);
-				 $ae->setGender($data['gender']);
+                 $ae = new \Share\Entity\Product();
+                 $ae->setTitle($data['title']);
+                 $ae->setDescription($data['description']);
+				 $ae->setOwner($data['owner_id']);
+				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
                 $objectManager->flush();
-                 // Redirect to list of albums
-                return $this->redirect()->toRoute('User');
+                 // Redirect to list of products
+                return $this->redirect()->toRoute('Product');
              }
          }
          return array('form' => $form);
@@ -62,7 +63,7 @@ use Share\Form\UserForm;
 
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
-             return $this->redirect()->toRoute('User', array(
+             return $this->redirect()->toRoute('Product', array(
                  'action' => 'add'
              ));
          }
@@ -70,31 +71,31 @@ use Share\Form\UserForm;
 
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ae = $objectManager->find('Share\Entity\User', $id);
+			 $ae = $objectManager->find('Share\Entity\Product', $id);
          }
          catch (\Exception $ex) {
-             return $this->redirect()->toRoute('User', array(
+             return $this->redirect()->toRoute('Product', array(
                  'action' => 'index'
              ));
          }
 
-		 $user = new User($ae);
-         $form  = new UserForm();
+		 $product = new Product($ae);
+         $form  = new ProductForm();
 		 #$album->title = $ae->getTitle();
          #$album->artist = $ae->getArtist();
-		 $form->bind($user);
+		 $form->bind($product);
          $form->get('submit')->setAttribute('value', 'bearbeiten');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($user->getInputFilter());
+             $form->setInputFilter($product->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
 				$data = $form->getData();
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-                return $this->redirect()->toRoute('user');
+                return $this->redirect()->toRoute('product');
              }
          }
 
@@ -114,12 +115,12 @@ use Share\Form\UserForm;
 		 # echo "Id $id";
 
          if (!$id) {
-             return $this->redirect()->toRoute('user');
+             return $this->redirect()->toRoute('product');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
 		 #          ->findOneBy(array('id' => $id));
-         $user = $objectManager->find('Share\Entity\User', $id);
+         $product = $objectManager->find('Share\Entity\Product', $id);
 		 # vereinfachte Suche - geht nur für Suche nach id
 		 #echo "Id $id". $album->getTitle() ;
 
@@ -129,17 +130,17 @@ use Share\Form\UserForm;
 
              if ($del == 'Ja') {
                  $id = (int) $request->getPost('id');
-				 $objectManager->remove($user);     # löschen
+				 $objectManager->remove($product);     # löschen
 				 $objectManager->flush();
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('user');
+             return $this->redirect()->toRoute('product');
          }
 
          return array(
              'id'    => $id,
-             'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
+             'product' => $product     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
 

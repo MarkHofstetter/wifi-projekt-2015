@@ -11,7 +11,7 @@ class User {
     * @ORM\Column(type="integer")
     */
     protected $id;
-
+	
 
     /** @ORM\Column(type="string") */
     protected $first_name;

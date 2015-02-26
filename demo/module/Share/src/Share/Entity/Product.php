@@ -55,11 +55,11 @@ class Product {
 	
 	
 	function getDescription() {
-       return $this->deescription;
+       return $this->description;
     }
 
     function setDescription($value) {
-       $this->deescription = $value;
+       $this->description = $value;
     }
 	
 	function getPicture() {

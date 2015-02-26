@@ -1,7 +1,7 @@
 <?php
- // module/Share/view/share/users/edit.phtml:
+ // module/Share/view/share/products/edit.phtml:
 
- $title = 'Mitglieder bearbeiten';
+ $title = 'Produkt bearbeiten';
  $this->headTitle($title);
  ?>
  <h2><?php echo $this->escapeHtml($title); ?></h2>
@@ -9,7 +9,7 @@
  <?php
  $form = $this->form;
  $form->setAttribute('action', $this->url(
-     'users',
+     'products',
      array(
          'action' => 'edit',
          'id'     => $this->id,
@@ -19,8 +19,9 @@
 
  echo $this->form()->openTag($form);
  echo $this->formHidden($form->get('id'));
- echo $this->formRow($form->get('first_name'));
- echo $this->formRow($form->get('last_name'));
-  echo $this->formRow($form->get('gender'));
+ echo $this->formRow($form->get('owner_id'));
+ echo $this->formRow($form->get('title'));
+ echo $this->formRow($form->get('description'));
+ echo $this->formRow($form->get('picture'));
  echo $this->formSubmit($form->get('submit'));
  echo $this->form()->closeTag();

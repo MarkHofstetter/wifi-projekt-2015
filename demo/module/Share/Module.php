@@ -11,8 +11,9 @@
 
  use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
  use Zend\ModuleManager\Feature\ConfigProviderInterface;
- use Share\Model\Users;
+ use Share\Model\User;
  use Share\Model\UsersTable;
+ use Share\Model\ProductsTable;
  use Zend\Db\ResultSet\ResultSet;
  use Zend\Db\TableGateway\TableGateway;
 
