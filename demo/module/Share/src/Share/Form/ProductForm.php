@@ -18,8 +18,6 @@
              'type' => 'Hidden',
          ));
 		 
-		 
-		 
          $this->add(array(
              'name' => 'title',
              'type' => 'Text',

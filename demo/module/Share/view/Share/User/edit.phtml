@@ -19,7 +19,8 @@
 
  
  echo $this->form()->openTag($form);
- echo $this->formHidden($form->get('id'));
+
+  echo $this->formHidden($form->get('id'));
  echo $this->formRow($form->get('first_name'));
  echo $this->formRow($form->get('last_name'));
   echo $this->formRow($form->get('gender'));

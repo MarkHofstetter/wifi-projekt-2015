@@ -39,7 +39,7 @@ return new ViewModel(array(
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);
                  $ae->setDescription($data['description']);
-				 $ae->setOwner($data['owner_id']);
+				 
 				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
