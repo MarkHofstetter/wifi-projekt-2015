@@ -29,6 +29,8 @@
                  'label' => 'Nachname',
              ),
          ));
+	
+		 
 		 $this->add(array(
              'name' => 'gender',
              'type' => 'Text',

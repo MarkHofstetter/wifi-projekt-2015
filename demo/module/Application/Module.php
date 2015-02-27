@@ -19,13 +19,26 @@ use Zend\Session\Container;
 class Module
 {
 
+	public function initSession($config)
+	{
+		$sessionConfig = new SessionConfig();
+		$sessionConfig->setOptions($config);
+		$sessionManager = new SessionManager($sessionConfig);
+		$sessionManager->start();
+		Container::setDefaultManager($sessionManager);
+	}
+	
     public function onBootstrap(MvcEvent $e)
     {
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
 		
+		
+		
     }
+	
+	
 
     public function getConfig()
     {

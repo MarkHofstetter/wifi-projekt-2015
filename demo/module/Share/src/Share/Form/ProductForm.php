@@ -3,10 +3,12 @@
  namespace Share\Form;
 
  use Zend\Form\Form;
+ use Doctrine\ORM\EntityManager;
 
  class ProductForm extends Form
  {
-     public function __construct($name = null)
+     
+	 public function __construct($name = null)
      {
          // we want to ignore the name passed
          parent::__construct('Product');
@@ -15,13 +17,9 @@
              'name' => 'id',
              'type' => 'Hidden',
          ));
-		 $this->add(array(
-             'name' => 'owner_id',
-             'type' => 'Text',
-			  'options' => array(
-                 'label' => 'Eigentuemer',
-             ),
-         ));
+		 
+		 
+		 
          $this->add(array(
              'name' => 'title',
              'type' => 'Text',
@@ -52,4 +50,8 @@
              ),
          ));
      }
+	 
+	 
+	 
+	 
  }

@@ -18,8 +18,8 @@ use Share\Form\UserForm;
              'users' => $users,
 			 
        ));
-
-	}
+	 }
+	
      public function addAction()
      {
          $form = new UserForm();
@@ -47,7 +47,7 @@ use Share\Form\UserForm;
 				$objectManager->persist($ae);
                 $objectManager->flush();
                  // Redirect to list of albums
-                return $this->redirect()->toRoute('User');
+                return $this->redirect()->toRoute('users');
              }
          }
          return array('form' => $form);
@@ -94,7 +94,7 @@ use Share\Form\UserForm;
 				$data = $form->getData();
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-                return $this->redirect()->toRoute('user');
+                return $this->redirect()->toRoute('users');
              }
          }
 
@@ -114,7 +114,7 @@ use Share\Form\UserForm;
 		 # echo "Id $id";
 
          if (!$id) {
-             return $this->redirect()->toRoute('user');
+             return $this->redirect()->toRoute('users');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
@@ -134,7 +134,7 @@ use Share\Form\UserForm;
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('user');
+             return $this->redirect()->toRoute('users');
          }
 
          return array(

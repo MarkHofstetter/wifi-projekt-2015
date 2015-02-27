@@ -36,6 +36,7 @@ class Product {
     function setOwner($value) {
        $this->owner = $value;
     }
+
 	
 	function getLendProducts() {
        return $this->lend_products;

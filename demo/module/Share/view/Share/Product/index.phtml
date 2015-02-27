@@ -9,14 +9,11 @@
      <a href="<?php echo $this->url('products', array('action'=>'add'));?>">Neues Produkt hinzuf&uuml;gen</a>
  </p>
  
-
-
  <br/> <br/>
  <table class="table">
  <tr>
      <th>Bezeichnung</th>
      <th>Details</th>
-	 <th>Besitzer</th>
 	 <th>Bild</th>
      <th>&nbsp;</th>
  </tr>
@@ -24,7 +21,6 @@
  <tr>
      <td><?php echo $this->escapeHtml($products->getTitle());?></td>
      <td><?php echo $this->escapeHtml($products->getDescription());?></td>
-	  <td><?php echo $this->escapeHtml($products->getOwner());?></td>
 	  <td><?php echo $this->escapeHtml($products->getPicture());?></td>
      <td>
          <a href="<?php echo $this->url('products',

@@ -5,21 +5,18 @@ use Zend\View\Model\ViewModel;
 use Share\Model\Product;
 use Share\Form\ProductForm;
 
- class ProductController extends AbstractActionController
- {
-	 public function indexAction()
-     {
-       $objectManager = $this
-         ->getServiceLocator()
-         ->get('Doctrine\ORM\EntityManager');
-
-       $products = $objectManager->getRepository('Share\Entity\Product')->findAll();
-       return new ViewModel(array(
-             'products' => $products,
-			 
-       ));
-
-	}
+class ProductController extends AbstractActionController
+{
+public function indexAction()
+{
+$objectManager = $this
+->getServiceLocator()
+->get('Doctrine\ORM\EntityManager');
+$products = $objectManager->getRepository('Share\Entity\Product')->findAll();
+return new ViewModel(array(
+'products' => $products,
+));
+}
      public function addAction()
      {
          $form = new ProductForm();
@@ -48,7 +45,7 @@ use Share\Form\ProductForm;
 				$objectManager->persist($ae);
                 $objectManager->flush();
                  // Redirect to list of products
-                return $this->redirect()->toRoute('Product');
+                return $this->redirect()->toRoute('products');
              }
          }
          return array('form' => $form);
@@ -95,7 +92,7 @@ use Share\Form\ProductForm;
 				$data = $form->getData();
 				$objectManager->persist($data->getEntity());
                 $objectManager->flush();
-                return $this->redirect()->toRoute('product');
+                return $this->redirect()->toRoute('products');
              }
          }
 
@@ -115,7 +112,7 @@ use Share\Form\ProductForm;
 		 # echo "Id $id";
 
          if (!$id) {
-             return $this->redirect()->toRoute('product');
+             return $this->redirect()->toRoute('products');
          }
 
          #$album = $objectManager->getRepository('Album\Entity\Album')
@@ -135,7 +132,7 @@ use Share\Form\ProductForm;
              }
 
              // Redirect to list of albums
-             return $this->redirect()->toRoute('product');
+             return $this->redirect()->toRoute('products');
          }
 
          return array(
