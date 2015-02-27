@@ -33,9 +33,13 @@
 		 
 		 $this->add(array(
              'name' => 'gender',
-             'type' => 'Text',
+             'type' => 'Radio',
              'options' => array(
                  'label' => 'Geschlecht m/w',
+				 'value_options' => array(
+                    'f' => 'Female',
+                    'm' => 'Male',
+                  ),
              ),
          ));
          $this->add(array(

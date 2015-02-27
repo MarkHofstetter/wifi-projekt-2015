@@ -23,7 +23,7 @@ class Product implements InputFilterAwareInterface
 	  $this->id = $ae->getId();
 	  $this->title = $ae->getTitle();
       $this->description = $ae->getDescription(); 
-	  $this->owner= $ae->getOwner(); 
+	  $this->owner= $ae->getOwner()->getFirstName(); 
 	  $this->picture = $ae->getPicture(); 
 	  $this->Entity = $ae;
 	}
@@ -32,7 +32,7 @@ class Product implements InputFilterAwareInterface
 	   $this->Entity->setTitle($this->title);
        $this->Entity->setDescription($this->description);
 	   $this->Entity->setOwner($this->owner);
-	   $this->Entity->setPicture($this->picture);
+	   $this->Entity->setPicture($this->picture);	   
 	   return $this->Entity;
     }	   
 	
@@ -42,7 +42,7 @@ class Product implements InputFilterAwareInterface
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->description  = (isset($data['description']))  ? $data['description']  : null;
-		$this->owner  = (isset($data['owner_id']))  ? $data['owner_id']  : null;
+		$this->owner  = (isset($data['owner']))  ? $data['owner']  : null;
 		$this->picture  = (isset($data['picture']))  ? $data['picture']  : null;
     }
 	
@@ -125,7 +125,24 @@ class Product implements InputFilterAwareInterface
                 ),
             ));
 			
-			
+			$inputFilter->add(array(
+                'name'     => 'owner',
+                'required' => false,
+                'filters'  => array(
+                    array('name' => 'StripTags'),
+                    array('name' => 'StringTrim'),
+                ),
+                'validators' => array(
+                    array(
+                        'name'    => 'StringLength',
+                        'options' => array(
+                            'encoding' => 'UTF-8',
+                            'min'      => 1,
+                            'max'      => 1000,
+                        ),
+                    ),
+                ),
+            ));
 
             $this->inputFilter = $inputFilter;
         }

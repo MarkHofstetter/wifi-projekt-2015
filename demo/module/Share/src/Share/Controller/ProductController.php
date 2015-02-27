@@ -14,7 +14,7 @@ $objectManager = $this
 ->get('Doctrine\ORM\EntityManager');
 $products = $objectManager->getRepository('Share\Entity\Product')->findAll();
 return new ViewModel(array(
-'products' => $products,
+   'products' => $products,
 ));
 }
      public function addAction()
@@ -45,6 +45,8 @@ return new ViewModel(array(
 				$objectManager->persist($ae);
                 $objectManager->flush();
                  // Redirect to list of products
+				$session = new \Zend\Session\Container('product');
+                $session->lastproduct = $data['title'];
                 return $this->redirect()->toRoute('products');
              }
          }

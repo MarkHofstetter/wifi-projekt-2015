@@ -45,6 +45,13 @@
             </div>
         </nav>		
         <div class="container">
+		<?php
+		$session = new \Zend\Session\Container('product');
+        if ($session && $session->lastproduct) {
+             echo "<h2>" . $session->lastproduct . "</h2>";
+             
+             }
+		?>
             <?php echo $this->content; ?>
             <hr>
             <footer>
