@@ -23,7 +23,7 @@ class Module
 	{
 		$sessionConfig = new SessionConfig();
 		$sessionConfig->setOptions($config);
-		$sessionManager = new SessionManager($sessionConfig);
+		$sessionManager = new \Zend\Session\SessionManager($sessionConfig);
 		$sessionManager->start();
 		Container::setDefaultManager($sessionManager);
 	}
@@ -33,9 +33,11 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
-		
-		
-		
+		$this->initSession(array(
+            'remember_me_seconds' => 180,
+            'use_cookies' => true,
+            'cookie_httponly' => true,
+        ));			
     }
 	
 	
