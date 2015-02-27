@@ -11,7 +11,7 @@ return array(
              'users' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/users[/][:action][/:id]',
+                     'route'    => '/share/users[/][:action][/:id]',
                      'constraints' => array(
                          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',
@@ -26,7 +26,7 @@ return array(
              'products' => array(
                  'type'    => 'segment',
                  'options' => array(
-                     'route'    => '/products[/][:action][/:id]',
+                     'route'    => '/share/products[/][:action][/:id]',
                      'constraints' => array(
                          'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                          'id'     => '[0-9]+',

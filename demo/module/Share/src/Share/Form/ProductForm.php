@@ -43,7 +43,7 @@
 		 
 		 $this->add(array(
              'name' => 'picture',
-             'type' => 'Text',
+             'type' => 'File',
              'options' => array(
                  'label' => 'Bildpfad',
              ),
