@@ -9,11 +9,11 @@
  <?php
 
 
- $form->setAttribute('action', $this->url('users', array('action' => 'index')));
+ $form->setAttribute('action', $this->url('login', array('action' => 'index')));
  $form->prepare();
 
  echo $this->form()->openTag($form);
- echo $this->formHidden($form->get('id'));
+ ## echo $this->formHidden($form->get('id'));
  echo $this->formRow($form->get('username'));
  echo $this->formRow($form->get('password'));
  echo $this->formSubmit($form->get('submit'));

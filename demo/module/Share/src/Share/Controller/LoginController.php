@@ -7,18 +7,16 @@ use Share\Form\LoginForm;
 
  class LoginController extends AbstractActionController
  {
- 
+
 		public function indexAction()
      {
          $form = new LoginForm();
         // $form->get('submit')->setValue('Add');
 		 $form->get('submit')->setAttribute('value', 'login');
-		 
+
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $login = new login();
-             $form->setInputFilter($login->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
@@ -26,30 +24,19 @@ use Share\Form\LoginForm;
                     ->getServiceLocator()
                     ->get('Doctrine\ORM\EntityManager');
 
-                 $data = $form->getData();
-                 $ae = new \Share\Entity\Login();
-		
-				
-				 $ae->setUserName($data['username']);
-				 $ae->setPassWord($data['password']);
-				 
-				 
-
-			   $query = $entityManager->createQuery('SELECT u.username, u.password FROM Share\Entity\User u WHERE u.username= $data[username] 
-			   and u.password=$data[password]');
-				$login = $query->getResult();
-				
-		
-				 
-				 
-				 
-
-				$objectManager->persist($ae);
+               $data = $form->getData();
                 //$objectManager->flush();
 
-				$session = new \Zend\Session\Container('user');
-                $session->username_loggedin = $data['username'];
-                return $this->redirect()->toRoute('users');
+               $user = $objectManager->getRepository('Share\Entity\USer')
+                 ->findOneBy(array('username' => $data['username'], 'password' => sha1($data['password'])));
+
+               if (empty($user)) {
+               	  return $this->redirect()->toRoute('login');
+               }
+
+				       $session = new \Zend\Session\Container('user');
+                 $session->username_loggedin = $data['username'];
+                 return $this->redirect()->toRoute('products');
              }
          }
          return array('form' => $form);
