@@ -1,0 +1,22 @@
+<?php
+ // module/Album/view/share/users/login.phtml:
+
+ $title = 'Login Share';
+ $this->headTitle($title);
+ ?>
+ <h2><?php echo $this->escapeHtml($title); ?></h2>
+ <br/><br/>
+ <?php
+
+
+ $form->setAttribute('action', $this->url('users', array('action' => 'login')));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formHidden($form->get('id'));
+
+ echo $this->formRow($form->get('username'));
+ echo $this->formRow($form->get('password'));
+
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();

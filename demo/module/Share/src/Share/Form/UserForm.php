@@ -15,6 +15,9 @@
              'name' => 'id',
              'type' => 'Hidden',
          ));
+		 
+		 
+		 
          $this->add(array(
              'name' => 'first_name',
              'type' => 'Text',
@@ -40,6 +43,35 @@
                     'f' => 'Female',
                     'm' => 'Male',
                   ),
+             ),
+         ));
+		 $this->add(array(
+             'name' => 'email',
+             'type' => 'Text',
+             'options' => array(
+                 'label' => 'E-Mail',
+             ),
+         ));
+		 $this->add(array(
+             'name' => 'username',
+             'type' => 'Text',
+             'options' => array(
+                 'label' => 'Username',
+             ),
+         ));
+		 $this->add(array(
+             'name' => 'password',
+             'type' => 'Text',
+             'options' => array(
+                 'label' => 'Passwort',
+             ),
+         ));
+		 $this->add(array(
+             'name' => 'admin',
+             'type' => 'checkbox',
+             'options' => array(
+                 'label' => 'Administrator',
+				 
              ),
          ));
          $this->add(array(

@@ -37,7 +37,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="<?php echo $this->url('home') ?>"><?php echo $this->translate('Home') ?></a></li>
-                        <li class="active"><a href="<?php echo $this->url('album') ?>"><?php echo $this->translate('Album') ?></a></li>
+                        <li class="active"><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login Share') ?></a></li>
 						<li class="active"><a href="<?php echo $this->url('users') ?>"><?php echo $this->translate('Share Mitglieder') ?></a></li>
 						<li class="active"><a href="<?php echo $this->url('products') ?>"><?php echo $this->translate('Share Produkte') ?></a></li>
                     </ul>
@@ -46,11 +46,20 @@
         </nav>		
         <div class="container">
 		<?php
-		$session = new \Zend\Session\Container('product');
-        if ($session && $session->lastproduct) {
-             echo "<h2>" . $session->lastproduct . "</h2>";
+		$session = new \Zend\Session\Container('user');
+        if ($session && $session->username_loggedin) 
+		{
+            
+			 echo "<h2>" . $session->username_loggedin. "</h2>";
              
-             }
+        }
+		$session = new \Zend\Session\Container('product');
+        if ($session && $session->lastproduct) 
+		{
+           echo "<h2>" . $session->lastproduct . "</h2>";
+			 
+             
+        }
 		?>
             <?php echo $this->content; ?>
             <hr>

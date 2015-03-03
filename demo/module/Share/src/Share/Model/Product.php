@@ -24,6 +24,7 @@ class Product implements InputFilterAwareInterface
 	  $this->title = $ae->getTitle();
       $this->description = $ae->getDescription(); 
 	  $this->owner= $ae->getOwner()->getFirstName(); 
+	 // $this->owner= $ae->getOwner()->getId();
 	  $this->picture = $ae->getPicture(); 
 	  $this->Entity = $ae;
 	}
@@ -138,7 +139,7 @@ class Product implements InputFilterAwareInterface
                         'options' => array(
                             'encoding' => 'UTF-8',
                             'min'      => 1,
-                            'max'      => 1000,
+                            'max'      => 100,
                         ),
                     ),
                 ),

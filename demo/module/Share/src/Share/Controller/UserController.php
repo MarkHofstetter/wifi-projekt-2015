@@ -40,13 +40,18 @@ use Share\Form\UserForm;
 
                  $data = $form->getData();
                  $ae = new \Share\Entity\User();
+				 
                  $ae->setFirstName($data['first_name']);
                  $ae->setLastName($data['last_name']);
 				 $ae->setGender($data['gender']);
+				 $ae->setEmail($data['email']);
+				 $ae->setUserName($data['username']);
+				 $ae->setPassWord($data['password']);
+				 $ae->setAdmin($data['admin']);
 
 				$objectManager->persist($ae);
                 $objectManager->flush();
-                 // Redirect to list of albums
+                 // Redirect to list of users
                 return $this->redirect()->toRoute('users');
              }
          }
@@ -133,7 +138,7 @@ use Share\Form\UserForm;
 				 $objectManager->flush();
              }
 
-             // Redirect to list of albums
+             // Redirect to list of users
              return $this->redirect()->toRoute('users');
          }
 
@@ -142,6 +147,7 @@ use Share\Form\UserForm;
              'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
-
+	 
+	 
 
  }

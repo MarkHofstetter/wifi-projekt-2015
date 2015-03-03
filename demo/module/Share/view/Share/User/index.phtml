@@ -14,16 +14,26 @@
  <br/> <br/>
  <table class="table">
  <tr>
-     <th>Vorname</th>
+     
+	 <th>Vorname</th>
      <th>Nachname</th>
 	 <th>Geschlecht</th>
+	 <th>E-Mail</th>
+	 <th>Username</th>
+	 <th>Admin</th>
      <th>&nbsp;</th>
  </tr>
  <?php foreach ($users as $users) : ?>
  <tr>
-     <td><?php echo $this->escapeHtml($users->getFirstName());?></td>
+     
+	 <td><?php echo $this->escapeHtml($users->getFirstName());?></td>
      <td><?php echo $this->escapeHtml($users->getLastName());?></td>
 	  <td><?php echo $this->escapeHtml($users->getGender());?></td>
+	  <td><?php echo $this->escapeHtml($users->getEmail());?></td>
+	  <td><?php echo $this->escapeHtml($users->getUserName());?></td>
+
+	  <td><?php echo $this->escapeHtml($users->getAdmin());?></td>
+	  
      <td>
          <a href="<?php echo $this->url('users',
              array('action'=>'edit', 'id' => $users->getId()));?>">Bearbeiten</a>

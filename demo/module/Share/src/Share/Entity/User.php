@@ -14,14 +14,27 @@ class User {
     protected $id;
 	
 
-    /** @ORM\Column(type="string") */
+    /** @ORM\Column(type="string", nullable=false) */
     protected $first_name;
 	
-	  /** @ORM\Column(type="string") */
+	  /** @ORM\Column(type="string", nullable=false) */
     protected $last_name;
 	
 	  /** @ORM\Column(type="string") */
     protected $gender;
+	
+		  /** @ORM\Column(type="string", unique=true, nullable=false) */
+    protected $username;
+	
+	/** @ORM\Column(type="string", nullable=false) */
+    protected $password;
+	
+	/** @ORM\Column(type="string", unique=true, nullable=false) */
+    protected $email;
+	
+	/** @ORM\Column(type="integer") */
+    protected $admin;
+	
 	
 	/**
 	* @ORM\OneToMany(targetEntity="Product", mappedBy="User")
@@ -107,6 +120,40 @@ class User {
     function setGender($value) {
        $this->gender= $value;
     }
+	
+	function getUserName() {
+       return $this->username;
+    }
+	
+	 function setUserName($value) {
+       $this->username = $value;
+    }
+
+    function setPassWord($value) {
+       $this->password = sha1($value);
+    }
+	
+	function getPassWord() {
+       return $this->password;
+	 }
+	 
+	   function getEmail() {
+       return $this->email;
+    }
+
+    function setEmail($value) {
+       $this->email = $value;
+    }
+    
+	function getAdmin() {
+       return $this->admin;
+    }
+
+    function setAdmin($value) {
+       $this->admin = $value;
+    }
+
+
 
     function getId() {
     	return $this->id;

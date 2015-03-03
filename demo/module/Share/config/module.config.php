@@ -4,6 +4,7 @@ return array(
          'invokables' => array(
              'Share\Controller\User' => 'Share\Controller\UserController',
 			 'Share\Controller\Product' => 'Share\Controller\ProductController',
+			 'Share\Controller\Login' => 'Share\Controller\LoginController',
          ),
      ),
      'router' => array(
@@ -37,6 +38,27 @@ return array(
                      ),
                  ),
              ),
+			 
+			 
+			 
+			 
+			 'login' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/share/login[/][:action][/:id]',
+                     'constraints' => array(
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Share\Controller\Login',
+                         'action'     => 'index',
+                     ),
+                 ),
+             ),
+			 
+			 
+			 
 
          ),
      ),

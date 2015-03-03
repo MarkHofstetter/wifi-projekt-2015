@@ -34,12 +34,14 @@ return new ViewModel(array(
              	 $objectManager = $this
                     ->getServiceLocator()
                     ->get('Doctrine\ORM\EntityManager');
-
+					
+								
+					 
                  $data = $form->getData();
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);
                  $ae->setDescription($data['description']);
-				 
+				 $ae->setOwner($data['owner']);
 				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
@@ -80,8 +82,6 @@ return new ViewModel(array(
 
 		 $product = new Product($ae);
          $form  = new ProductForm();
-		 #$album->title = $ae->getTitle();
-         #$album->artist = $ae->getArtist();
 		 $form->bind($product);
          $form->get('submit')->setAttribute('value', 'bearbeiten');
 
@@ -133,7 +133,7 @@ return new ViewModel(array(
 				 $objectManager->flush();
              }
 
-             // Redirect to list of albums
+             // Redirect to list of products
              return $this->redirect()->toRoute('products');
          }
 
