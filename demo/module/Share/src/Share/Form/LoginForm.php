@@ -11,10 +11,7 @@ namespace Share\Form;
          // we want to ignore the name passed
          parent::__construct('Login');
 
-         $this->add(array(
-             'name' => 'id',
-             'type' => 'Hidden',
-         ));
+        
 
          $this->add(array(
              'name' => 'username',
