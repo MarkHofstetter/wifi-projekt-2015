@@ -73,6 +73,9 @@ public function __construct() {
 **/
 private $users_that_trust_me;
 
+public function getUsersThatTrustMe() {
+	 return $this->users_that_trust_me;
+}
 
 public function addUsersThatTrustMe(User $user)
 {

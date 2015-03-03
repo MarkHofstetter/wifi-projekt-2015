@@ -36,6 +36,7 @@ use Share\Form\LoginForm;
 
 				       $session = new \Zend\Session\Container('user');
                  $session->username_loggedin = $data['username'];
+                 $session->user_id           = $user->getId();
                  return $this->redirect()->toRoute('products');
              }
          }

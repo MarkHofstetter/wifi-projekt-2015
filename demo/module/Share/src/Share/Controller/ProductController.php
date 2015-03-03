@@ -41,7 +41,7 @@ class ProductController extends ShareController
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);
                  $ae->setDescription($data['description']);
-				 $ae->setOwner($data['owner']);
+				 $ae->setOwner($data['owner']); // read owner by id from doctrine
 				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
@@ -143,5 +143,12 @@ class ProductController extends ShareController
          );
      }
 
+     public function availableAction() {
+        /*
+        $users_that_trust_me = $this->user->getUsersThatTrustMe();
+        foreach user
+          user->getProducts
 
+        */
+     }
  }
