@@ -64,10 +64,10 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'product_users', 'trust_users', 'trusts', 'lend_users');
+            return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users');
         }
 
-        return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'product_users', 'trust_users', 'trusts', 'lend_users');
+        return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users');
     }
 
     /**
@@ -325,6 +325,94 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setGender', array($value));
 
         return parent::setGender($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getUserName()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserName', array());
+
+        return parent::getUserName();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUserName($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUserName', array($value));
+
+        return parent::setUserName($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPassWord($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPassWord', array($value));
+
+        return parent::setPassWord($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPassWord()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassWord', array());
+
+        return parent::getPassWord();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEmail()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', array());
+
+        return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmail($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', array($value));
+
+        return parent::setEmail($value);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getAdmin()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getAdmin', array());
+
+        return parent::getAdmin();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setAdmin($value)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setAdmin', array($value));
+
+        return parent::setAdmin($value);
     }
 
     /**
