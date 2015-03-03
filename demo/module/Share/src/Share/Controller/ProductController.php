@@ -5,24 +5,24 @@ use Zend\View\Model\ViewModel;
 use Share\Model\Product;
 use Share\Form\ProductForm;
 
-class ProductController extends AbstractActionController
+class ProductController extends ShareController
 {
-public function indexAction()
-{
-$objectManager = $this
-->getServiceLocator()
-->get('Doctrine\ORM\EntityManager');
-$products = $objectManager->getRepository('Share\Entity\Product')->findAll();
-return new ViewModel(array(
-   'products' => $products,
-));
-}
+
+     public function indexAction()
+     {
+        $products = $this->objectManager->getRepository('Share\Entity\Product')->findAll();
+        return new ViewModel(array(
+          'products' => $products,
+        ));
+     }
+
+
      public function addAction()
      {
          $form = new ProductForm();
         // $form->get('submit')->setValue('Add');
 		 $form->get('submit')->setAttribute('value', 'anlegen');
-		 
+
 
          $request = $this->getRequest();
          if ($request->isPost()) {
@@ -34,9 +34,9 @@ return new ViewModel(array(
              	 $objectManager = $this
                     ->getServiceLocator()
                     ->get('Doctrine\ORM\EntityManager');
-					
-								
-					 
+
+
+
                  $data = $form->getData();
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);

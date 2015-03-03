@@ -5,7 +5,7 @@ use Zend\View\Model\ViewModel;
 use Share\Model\User;
 use Share\Form\UserForm;
 
- class UserController extends AbstractActionController
+ class UserController extends ShareController
  {
 	 public function indexAction()
      {
@@ -16,16 +16,16 @@ use Share\Form\UserForm;
        $users = $objectManager->getRepository('Share\Entity\User')->findAll();
        return new ViewModel(array(
              'users' => $users,
-			 
+
        ));
 	 }
-	
+
      public function addAction()
      {
          $form = new UserForm();
         // $form->get('submit')->setValue('Add');
 		 $form->get('submit')->setAttribute('value', 'anlegen');
-		 
+
 
          $request = $this->getRequest();
          if ($request->isPost()) {
@@ -40,7 +40,7 @@ use Share\Form\UserForm;
 
                  $data = $form->getData();
                  $ae = new \Share\Entity\User();
-				 
+
                  $ae->setFirstName($data['first_name']);
                  $ae->setLastName($data['last_name']);
 				 $ae->setGender($data['gender']);
@@ -147,7 +147,7 @@ use Share\Form\UserForm;
              'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
-	 
-	 
+
+
 
  }

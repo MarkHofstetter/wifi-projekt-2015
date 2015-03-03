@@ -42,4 +42,11 @@ use Share\Form\LoginForm;
          return array('form' => $form);
 
      }
+
+     public function logoutAction()
+     {
+     	  $session = new \Zend\Session\Container('user');
+     	  $session->getManager()->destroy();
+     	  return $this->redirect()->toRoute('login');
+     }
  }
