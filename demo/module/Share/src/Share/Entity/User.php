@@ -23,13 +23,13 @@ class User {
 	  /** @ORM\Column(type="string") */
     protected $gender;
 
-		  /** @ORM\Column(type="string", unique=true, nullable=false) */
+		  /** @ORM\Column(type="string", unique=true, nullable=true) */
     protected $username;
 
-	/** @ORM\Column(type="string", nullable=false) */
+	/** @ORM\Column(type="string", nullable=true) */
     protected $password;
 
-	/** @ORM\Column(type="string", unique=true, nullable=false) */
+	/** @ORM\Column(type="string", unique=true, nullable=true) */
     protected $email;
 
 	/** @ORM\Column(type="integer") */

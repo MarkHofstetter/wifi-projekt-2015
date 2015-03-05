@@ -64,10 +64,10 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users');
+            return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users', '' . "\0" . 'Share\\Entity\\User' . "\0" . 'users_trusted', '' . "\0" . 'Share\\Entity\\User' . "\0" . 'users_that_trust_me');
         }
 
-        return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users');
+        return array('__isInitialized__', 'id', 'first_name', 'last_name', 'gender', 'username', 'password', 'email', 'admin', 'product_users', 'trust_users', 'trusts', 'lend_users', '' . "\0" . 'Share\\Entity\\User' . "\0" . 'users_trusted', '' . "\0" . 'Share\\Entity\\User' . "\0" . 'users_that_trust_me');
     }
 
     /**
@@ -173,6 +173,28 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     }
 
     
+    /**
+     * {@inheritDoc}
+     */
+    public function getUsersThatTrustMe()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsersThatTrustMe', array());
+
+        return parent::getUsersThatTrustMe();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addUsersThatTrustMe(\Share\Entity\User $user)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addUsersThatTrustMe', array($user));
+
+        return parent::addUsersThatTrustMe($user);
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -428,6 +450,17 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', array());
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function addTrustedUser(\Share\Entity\User $user)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'addTrustedUser', array($user));
+
+        return parent::addTrustedUser($user);
     }
 
 }

@@ -27,14 +27,14 @@ use Share\Form\LoginForm;
                $data = $form->getData();
                 //$objectManager->flush();
 
-               $user = $objectManager->getRepository('Share\Entity\USer')
+               $user = $objectManager->getRepository('Share\Entity\User')
                  ->findOneBy(array('username' => $data['username'], 'password' => sha1($data['password'])));
 
                if (empty($user)) {
                	  return $this->redirect()->toRoute('login');
                }
 
-				       $session = new \Zend\Session\Container('user');
+				 $session = new \Zend\Session\Container('user');
                  $session->username_loggedin = $data['username'];
                  $session->user_id           = $user->getId();
                  return $this->redirect()->toRoute('products');

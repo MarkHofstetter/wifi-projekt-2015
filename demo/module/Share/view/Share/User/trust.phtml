@@ -1,0 +1,28 @@
+<?php
+ // module/Share/view/share/users/trust.phtml:
+
+ $title = 'Freund hinzufuegen';
+ $this->headTitle($title);
+ ?>
+ <h2><?php echo $this->escapeHtml($title); ?></h2>
+<br/><br/>
+ <?php
+
+
+ $form = $this->form;
+ $form->setAttribute('action', $this->url(
+     'users',
+     array(
+         'action' => 'trust',
+         'id'     => $this->id,
+     )
+ ));
+
+
+ $form->prepare();
+ echo $this->form()->openTag($form);
+
+  echo $this->formHidden($form->get('id'));
+
+ echo $this->formSubmit($form->get('submit'));
+ echo $this->form()->closeTag();

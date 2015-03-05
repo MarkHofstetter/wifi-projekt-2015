@@ -40,6 +40,7 @@
                         <li class="active"><a href="<?php echo $this->url('login') ?>"><?php echo $this->translate('Login Share') ?></a></li>
 						<li class="active"><a href="<?php echo $this->url('users') ?>"><?php echo $this->translate('Share Mitglieder') ?></a></li>
 						<li class="active"><a href="<?php echo $this->url('products') ?>"><?php echo $this->translate('Share Produkte') ?></a></li>
+						<li class="active"><a href="<?php echo $this->url('login', array('action'=>'logout'));?>">Logout</a></li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -50,13 +51,13 @@
         if ($session && $session->username_loggedin) 
 		{
             
-			 echo "<h2>" . $session->username_loggedin. "</h2>";
+			 echo "<p>Hallo " . $session->username_loggedin.", deine ID ist ". $session->user_id;"</p>";
              
         }
 		$session = new \Zend\Session\Container('product');
         if ($session && $session->lastproduct) 
 		{
-           echo "<h2>" . $session->lastproduct . "</h2>";
+           echo "<p>Letztes eingefuegtes Produkt ist " . $session->lastproduct . "</p>";
 			 
              
         }

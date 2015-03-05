@@ -4,6 +4,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Share\Model\User;
 use Share\Form\UserForm;
+use Share\Form\TrustForm;
 
  class UserController extends ShareController
  {
@@ -101,6 +102,72 @@ use Share\Form\UserForm;
                 $objectManager->flush();
                 return $this->redirect()->toRoute('users');
              }
+         }
+
+         return array(
+             'id' => $id,
+             'form' => $form,
+         );
+     }
+	 
+	 
+	      public function trustAction()
+     {
+	     $objectManager = $this
+           ->getServiceLocator()
+           ->get('Doctrine\ORM\EntityManager');
+
+         $id = (int) $this->params()->fromRoute('id', 0);
+         if (!$id) {
+             return $this->redirect()->toRoute('User', array(
+                 'action' => 'add'
+             ));
+         }
+         try {
+             #$album = $this->getAlbumTable()->getAlbum($id);
+			 $ae = $objectManager->find('Share\Entity\User', $id);
+         }
+         catch (\Exception $ex) {
+             return $this->redirect()->toRoute('User', array(
+                 'action' => 'index'
+             ));
+         }
+		  $objectManager = $this
+                    ->getServiceLocator()
+                    ->get('Doctrine\ORM\EntityManager');
+         $user = $objectManager->find('Share\Entity\User', $id);
+		 $user->getFirstName() ;
+		 $user->getLastName() ;
+		 
+		 //Eigene Id
+		$session = new \Zend\Session\Container('user');
+		$session->user_id;
+	
+
+		 $user = new User($ae);
+         $form  = new TrustForm();
+		 $form->bind($user);
+         $form->get('submit')->setAttribute('value', 'wird mein Freund');
+
+         $request = $this->getRequest();
+         if ($request->isPost()) {
+             $form->setInputFilter($user->getInputFilter());
+             $form->setData($request->getPost());
+
+             if ($form->isValid()) 
+			 {
+             	 $objectManager = $this
+                    ->getServiceLocator()
+                    ->get('Doctrine\ORM\EntityManager');
+
+                 $data = $form->getData();
+                 $ae = new \Share\Entity\User();
+                 $ae->addTrustedUser($data['id']);
+				$objectManager->persist($ae);
+                $objectManager->flush();
+                return $this->redirect()->toRoute('users');
+             }
+			 else  return $this->redirect()->toRoute('users');
          }
 
          return array(

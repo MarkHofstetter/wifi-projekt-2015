@@ -10,7 +10,6 @@
  </p>
  
 
-
  <br/> <br/>
  <table class="table">
  <tr>
@@ -37,6 +36,8 @@
      <td>
          <a href="<?php echo $this->url('users',
              array('action'=>'edit', 'id' => $users->getId()));?>">Bearbeiten</a>
+			 <a href="<?php echo $this->url('users',
+             array('action'=>'trust', 'id' => $users->getId()));?>">als Freund hinzuf&uuml;gen</a>
          <a href="<?php echo $this->url('users',
              array('action'=>'delete', 'id' => $users->getId()));?>">L&ouml;schen</a>
      </td>
