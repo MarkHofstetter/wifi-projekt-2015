@@ -10,7 +10,9 @@ class ProductController extends ShareController
 
      public function indexAction()
      {
-        $products = $this->objectManager->getRepository('Share\Entity\Product')->findAll();
+	    
+        $products = $this->objectManager->getRepository('Share\Entity\Product')
+		   ->findBy(array('owner' => $this->user ));
         return new ViewModel(array(
           'products' => $products,
         ));
@@ -41,7 +43,13 @@ class ProductController extends ShareController
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);
                  $ae->setDescription($data['description']);
-				 $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
+				 
+				 # take user_id from the session and look up the user object by id				 
+                 # $user = $objectManager->find('Share\Entity\User', $session->user_id);
+				 # as we need the user all the time we read it in the parent class
+        				 
+				 # $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
+				 $ae->setOwner($this->user);
 				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
@@ -63,12 +71,13 @@ class ProductController extends ShareController
            ->get('Doctrine\ORM\EntityManager');
 
          $id = (int) $this->params()->fromRoute('id', 0);
-         if (!$owner_id) {
+         /*
+		 if (!$owner_id) {
              return $this->redirect()->toRoute('Product', array(
                  'action' => 'add'
              ));
          }
-
+         */
 
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);

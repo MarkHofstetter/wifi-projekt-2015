@@ -13,7 +13,7 @@ class Product implements InputFilterAwareInterface
     public $description;
 	public $owner;
 	public $picture;
-    protected $owner_id
+    protected $owner_id;
 	protected $Entity;
 	protected $inputFilter;
 
@@ -22,7 +22,7 @@ class Product implements InputFilterAwareInterface
 	     return;
 	  }	
 	  $this->id = $ae->getId();
-	  $this->owner_id = $ae-> getOwner_id
+	  $this->owner_id = $ae->getOwner()->getId();
 	  $this->title = $ae->getTitle();
       $this->description = $ae->getDescription(); 
 	  $this->owner= $ae->getOwner()->getFirstName(); 

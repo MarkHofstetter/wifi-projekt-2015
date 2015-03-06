@@ -13,7 +13,7 @@ class Product {
     /** @ORM\Column(type="string") */
     protected $title;
 	
-	/** @ORM\Column(type="string", nullable=true) */
+   /** @ORM\Column(type="string", nullable=true) */
    protected $description;
 	
 	/** @ORM\Column(type="string", nullable=true) */
