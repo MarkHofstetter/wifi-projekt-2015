@@ -20,10 +20,10 @@ class User {
 	  /** @ORM\Column(type="string", nullable=false) */
     protected $last_name;
 
-	  /** @ORM\Column(type="string") */
+	/** @ORM\Column(type="string") */
     protected $gender;
 
-		  /** @ORM\Column(type="string", unique=true, nullable=true) */
+	/** @ORM\Column(type="string", unique=true, nullable=true) */
     protected $username;
 
 	/** @ORM\Column(type="string", nullable=true) */
@@ -32,7 +32,7 @@ class User {
 	/** @ORM\Column(type="string", unique=true, nullable=true) */
     protected $email;
 
-	/** @ORM\Column(type="integer") */
+	/** @ORM\Column(type="integer", nullable=true) */
     protected $admin;
 
 

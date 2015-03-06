@@ -9,13 +9,6 @@ class Product {
     * @ORM\Column(type="integer")
     */
     protected $id;
-	
-	/**
-	* @ORM\OwnerId
-    * @ORM\GeneratedValue(strategy="AUTO")
-    * @ORM\Column(type="integer")
-    */
-	 protected $owner_id
 	 
     /** @ORM\Column(type="string") */
     protected $title;
