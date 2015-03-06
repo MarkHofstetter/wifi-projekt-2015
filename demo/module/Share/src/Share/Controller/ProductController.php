@@ -155,11 +155,16 @@ class ProductController extends ShareController
     public function availableAction() {
         
         $users_that_trust_me = $this->user->getUsersThatTrustMe();
-        foreach ($users_that_trust_me as $user) {
+       foreach ($users_that_trust_me as $user) {
            echo $user->getFirstName() .'<br>';
 		   foreach ($user->getProductUsers() as $product) {
 		      echo $product->getTitle().'<br>';
 		   }
         }
+		
+        return new ViewModel(array(
+          'users_that_trust_me' => $users_that_trust_me,
+        ));
+	
     }
 }	
