@@ -111,12 +111,8 @@ use Share\Form\TrustForm;
      }
 	 
 	 
-	      public function trustAction()
-     {
-	     $objectManager = $this
-           ->getServiceLocator()
-           ->get('Doctrine\ORM\EntityManager');
-
+	public function trustAction()
+    {	    
          $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id) {
              return $this->redirect()->toRoute('User', array(
@@ -125,46 +121,30 @@ use Share\Form\TrustForm;
          }
          try {
              #$album = $this->getAlbumTable()->getAlbum($id);
-			 $ae = $objectManager->find('Share\Entity\User', $id);
+			 $trust_user = $this->objectManager->find('Share\Entity\User', $id);
          }
          catch (\Exception $ex) {
              return $this->redirect()->toRoute('User', array(
                  'action' => 'index'
              ));
          }
-		  $objectManager = $this
-                    ->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-         $user = $objectManager->find('Share\Entity\User', $id);
-		 $user->getFirstName() ;
-		 $user->getLastName() ;
-		 
-		 //Eigene Id
-		$session = new \Zend\Session\Container('user');
-		$session->user_id;
-	
-
-		 $user = new User($ae);
+		  			 
          $form  = new TrustForm();
-		 $form->bind($user);
+		 $form->get('trust_id')->setAttribute('value', $id);
          $form->get('submit')->setAttribute('value', 'wird mein Freund');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
-             $form->setInputFilter($user->getInputFilter());
+             # $form->setInputFilter($user->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) 
-			 {
-             	 $objectManager = $this
-                    ->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
-
-                 $data = $form->getData();
-                 $ae = new \Share\Entity\User();
-                 $ae->addTrustedUser($data['id']);
-				$objectManager->persist($ae);
-                $objectManager->flush();
+			 {            
+                $data = $form->getData();
+                $trust_user = $this->objectManager->find('Share\Entity\User', $data['trust_id']);
+                $this->user->addTrustedUser($trust_user);
+				$this->objectManager->persist($this->user);
+                $this->objectManager->flush();
                 return $this->redirect()->toRoute('users');
              }
 			 else  return $this->redirect()->toRoute('users');
@@ -172,6 +152,7 @@ use Share\Form\TrustForm;
 
          return array(
              'id' => $id,
+			 'trust_id' => $id,
              'form' => $form,
          );
      }

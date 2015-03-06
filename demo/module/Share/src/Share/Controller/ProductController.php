@@ -152,12 +152,14 @@ class ProductController extends ShareController
          );
      }
 
-     public function availableAction() {
-        /*
+    public function availableAction() {
+        
         $users_that_trust_me = $this->user->getUsersThatTrustMe();
-        foreach user
-          user->getProducts
-
-        */
-     }
- }
+        foreach ($users_that_trust_me as $user) {
+           echo $user->getFirstName() .'<br>';
+		   foreach ($user->getProductUsers() as $product) {
+		      echo $product->getTitle().'<br>';
+		   }
+        }
+    }
+}	

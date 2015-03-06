@@ -37,7 +37,7 @@ class User {
 
 
 	/**
-	* @ORM\OneToMany(targetEntity="Product", mappedBy="User")
+	* @ORM\OneToMany(targetEntity="Product", mappedBy="owner")
 	**/
 	protected $product_users;
 
@@ -69,7 +69,8 @@ public function __construct() {
 
 
 /**
-* @ORM\ManyToMany(targetEntity="User", mappedBy="users_that_trust_me")
+* @ORM\ManyToMany(targetEntity="User", mappedBy="users_trusted")
+* @ORM\JoinTable(name="user_x_user")
 **/
 private $users_that_trust_me;
 
@@ -79,7 +80,7 @@ public function getUsersThatTrustMe() {
 
 public function addUsersThatTrustMe(User $user)
 {
-$this->users_that_trust_me[] = $user;
+   $this->users_that_trust_me[] = $user;
 }
 
 
@@ -188,7 +189,7 @@ $this->users_that_trust_me[] = $user;
 
    public function addTrustedUser(User $user)
    {
-     $user_trusted->addUsersThatTrustMe($this); // synchronously updating inverse side
+     $user->addUsersThatTrustMe($this); // synchronously updating inverse side
      $this->users_trusted[] = $user;
    }
 

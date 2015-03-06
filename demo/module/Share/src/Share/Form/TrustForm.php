@@ -15,8 +15,11 @@
              'name' => 'id',
              'type' => 'Hidden',
          ));
-		 
-		 
+
+         $this->add(array(
+             'name' => 'trust_id',
+             'type' => 'Hidden',
+         ));		 		 
 	
          $this->add(array(
              'name' => 'submit',
