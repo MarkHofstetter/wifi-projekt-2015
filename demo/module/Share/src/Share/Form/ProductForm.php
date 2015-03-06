@@ -14,6 +14,12 @@
          parent::__construct('Product');
 
          $this->add(array(
+             'name' => 'owner_id',
+             'type' => 'Hidden',
+         ));
+		 
+		 
+		 $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
          ));

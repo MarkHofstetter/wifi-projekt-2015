@@ -41,7 +41,7 @@ class ProductController extends ShareController
                  $ae = new \Share\Entity\Product();
                  $ae->setTitle($data['title']);
                  $ae->setDescription($data['description']);
-				 $ae->setOwner($data['owner']); // read owner by id from doctrine
+				 $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
 				 $ae->setPicture($data['picture']);
 
 				$objectManager->persist($ae);
@@ -63,7 +63,7 @@ class ProductController extends ShareController
            ->get('Doctrine\ORM\EntityManager');
 
          $id = (int) $this->params()->fromRoute('id', 0);
-         if (!$id) {
+         if (!$owner_id) {
              return $this->redirect()->toRoute('Product', array(
                  'action' => 'add'
              ));

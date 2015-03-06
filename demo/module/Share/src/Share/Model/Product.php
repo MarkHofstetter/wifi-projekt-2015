@@ -13,7 +13,8 @@ class Product implements InputFilterAwareInterface
     public $description;
 	public $owner;
 	public $picture;
-    protected $Entity;
+    protected $owner_id
+	protected $Entity;
 	protected $inputFilter;
 
 	function __construct($ae) {
@@ -21,6 +22,7 @@ class Product implements InputFilterAwareInterface
 	     return;
 	  }	
 	  $this->id = $ae->getId();
+	  $this->owner_id = $ae-> getOwner_id
 	  $this->title = $ae->getTitle();
       $this->description = $ae->getDescription(); 
 	  $this->owner= $ae->getOwner()->getFirstName(); 
@@ -41,6 +43,7 @@ class Product implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
+		$this->owner_id = (isset ($date['owner_id']))   ? $date['owner_id']   : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->description  = (isset($data['description']))  ? $data['description']  : null;
 		$this->owner  = (isset($data['owner']))  ? $data['owner']  : null;
