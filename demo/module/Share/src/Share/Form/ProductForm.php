@@ -13,12 +13,12 @@
          // we want to ignore the name passed
          parent::__construct('Product');
 
-         $this->add(array(
+         /*
+		 $this->add(array(
              'name' => 'owner_id',
              'type' => 'Hidden',
          ));
-		 
-		 
+		 		 
 		 
 		 $this->add(array(
              'name' => 'owner',
@@ -27,7 +27,7 @@
                  'label' => 'Owner',
              ),
          ));
-		 
+		 */
 		 
 		 $this->add(array(
              'name' => 'id',

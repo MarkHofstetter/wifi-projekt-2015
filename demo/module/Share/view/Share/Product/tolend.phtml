@@ -17,7 +17,8 @@
 			  echo '<td></td><td>'.$product->getDescription().'</td>';
 			  ?>
 			  <td>
-			  <a href="<?php echo '../lend/add/'.$product->getId();?>">ausleihen</a>
+			  <a href="<?php echo $this->url('lend',	
+             array('action'=>'add', 'id' => $product->getId()));?>">ausleihen</a>
 			  
 			  
 			  </td></tr>

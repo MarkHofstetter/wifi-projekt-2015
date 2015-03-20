@@ -176,6 +176,17 @@ class User extends \Share\Entity\User implements \Doctrine\ORM\Proxy\Proxy
     /**
      * {@inheritDoc}
      */
+    public function getUsersTrusted()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUsersTrusted', array());
+
+        return parent::getUsersTrusted();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getUsersThatTrustMe()
     {
 

@@ -25,7 +25,7 @@ class Product implements InputFilterAwareInterface
 	  $this->owner_id = $ae->getOwner()->getId();
 	  $this->title = $ae->getTitle();
       $this->description = $ae->getDescription(); 
-	  $this->owner= $ae->getOwner()->getFirstName(); 
+	  $this->ownername = $ae->getOwner()->getFirstName() .' '. $ae->getOwner()->getLastName() ; 
 	 // $this->owner= $ae->getOwner()->getId();
 	  $this->picture = $ae->getPicture(); 
 	  $this->Entity = $ae;
@@ -34,7 +34,7 @@ class Product implements InputFilterAwareInterface
 	function getEntity() {	   
 	   $this->Entity->setTitle($this->title);
        $this->Entity->setDescription($this->description);
-	   $this->Entity->setOwner($this->owner);
+	   # $this->Entity->setOwner($this->owner);
 	   $this->Entity->setPicture($this->picture);	   
 	   return $this->Entity;
     }	   
@@ -46,7 +46,7 @@ class Product implements InputFilterAwareInterface
 		//$this->owner_id = (isset ($data['owner_id']))   ? $data['owner_id']   : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->description  = (isset($data['description']))  ? $data['description']  : null;
-		$this->owner  = (isset($data['owner']))  ? $data['owner']  : null;
+		#$this->owner  = (isset($data['owner']))  ? $data['owner']  : null;
 		$this->picture  = (isset($data['picture']))  ? $data['picture']  : null;
     }
 	
