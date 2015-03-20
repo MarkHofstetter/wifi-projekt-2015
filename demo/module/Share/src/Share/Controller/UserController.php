@@ -9,14 +9,12 @@ use Share\Form\TrustForm;
  class UserController extends ShareController
  {
 	 public function indexAction()
-     {
-       $objectManager = $this
-         ->getServiceLocator()
-         ->get('Doctrine\ORM\EntityManager');
-
-       $users = $objectManager->getRepository('Share\Entity\User')->findAll();
+     {       
+       $users = $this->objectManager->getRepository('Share\Entity\User')->findAll();
        return new ViewModel(array(
-             'users' => $users,
+             'users'         => $users,
+             'objectManager' => $this->objectManager,
+			 'me'            => $this->user,
 			 ));
 	   
 	 }

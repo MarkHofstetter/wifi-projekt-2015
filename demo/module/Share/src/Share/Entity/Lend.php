@@ -10,10 +10,10 @@ class Lend {
     */
     protected $id;
 
-    /** @ORM\Column(type="datetime") */
+    /** @ORM\Column(type="date") */
     protected $lend_begin;
 	
-	/** @ORM\Column(type="datetime") */
+	/** @ORM\Column(type="date") */
     protected $lend_end;
 	
 	

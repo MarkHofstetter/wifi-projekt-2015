@@ -22,18 +22,17 @@ class LendController extends ShareController
              $form->setData($request->getPost());
 			
              if ($form->isValid()) {
-             	 $objectManager = $this
-                    ->getServiceLocator()
-                    ->get('Doctrine\ORM\EntityManager');
+             	
 
 			//$ae = $objectManager->find('Share\Entity\Product', $id);
 
                  $data = $form->getData();
                  $ae = new \Share\Entity\Lend();
 				 $ae->setLender($this->user);
-				 $ae->setLendBegin($data['product_id']);
-                 $ae->setLendBegin($data['lend_begin']);
-                 $ae->setLendEnd($data['lend_end']);
+				 # $ae->setLendBegin($data['product_id']);
+                 
+				 $ae->setLendBegin(\DateTime::createFromFormat('Y-m-d', $data['lend_begin']));
+                 $ae->setLendEnd(\DateTime::createFromFormat('Y-m-d', $data['lend_end']));
 				
 				 # take user_id from the session and look up the user object by id				 
                  # $user = $objectManager->find('Share\Entity\User', $session->user_id);
@@ -42,8 +41,8 @@ class LendController extends ShareController
 				 # $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
 			
 
-				$objectManager->persist($ae);
-                $objectManager->flush();
+				$this->objectManager->persist($ae);
+                $this->objectManager->flush();
 				
                
                 return $this->redirect()->toRoute('products');

@@ -15,7 +15,9 @@ abstract class ShareController extends AbstractActionController {
    public function preDispatch() {
       $this->objectManager = $this->getServiceLocator()
               ->get('Doctrine\ORM\EntityManager');
-
+      $dbh = $this->objectManager->getConnection();
+      $sth = $dbh->prepare("ALTER SESSION SET NLS_DATE_FORMAT='YYYY-MM-DD HH24:MI:SS'");
+	  $sth->execute();
        $session = new \Zend\Session\Container('user');
        if (!$session || !$session->username_loggedin) {
    	       return $this->redirect()->toRoute('login');

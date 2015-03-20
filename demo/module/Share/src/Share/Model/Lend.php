@@ -16,7 +16,7 @@ class Lend implements InputFilterAwareInterface
 	protected $Entity;
 	protected $inputFilter;
 
-	function __construct($ae) 
+	/*function __construct($ae) 
 	{
 	  if (empty($ae)) {
 	     return;
@@ -28,6 +28,7 @@ class Lend implements InputFilterAwareInterface
 	  $this->lend_end = $ae->getLendEnd();  
 	  $this->Entity = $ae;
 	}
+	*/
 	
 	function getEntity() {	   
 	   $this->Entity->setLender($this->lender);
@@ -92,17 +93,12 @@ class Lend implements InputFilterAwareInterface
 
             $inputFilter->add(array(
                 'name'     => 'lend_begin',
-                'required' => true,
-                'filters'  => array(
-                   
-                ),
-
+                'required' => true,                
                 'validators' => array(
                     array(
-                        'name'    => 'Date',
-                        'options' => array(
-                           'format' => 'dd.mm.YYYY',
-                        ),
+                        'name'    => 'Date',                        
+                        
+						'format' => 'd.m.Y',                 
                     ),
                 ),
             ));
@@ -116,10 +112,8 @@ class Lend implements InputFilterAwareInterface
 
                 'validators' => array(
                     array(
-                        'name'    => 'Date',
-                        'options' => array(
-                           'format' => 'dd.mm.YYYY',
-                        ),
+                        'name'    => 'Date',                        
+                        'format' => 'd.m.Y',                        
                     ),
                 ),
             ));

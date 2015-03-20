@@ -20,27 +20,43 @@
 	 <th>E-Mail</th>
 	 <th>Username</th>
 	 <th>Admin</th>
+	 <th>MyFriend</th>
      <th>&nbsp;</th>
  </tr>
- <?php foreach ($users as $users) : ?>
+ <?php foreach ($users as $user) : ?>
  <tr>
      
-	 <td><?php echo $this->escapeHtml($users->getFirstName());?></td>
-     <td><?php echo $this->escapeHtml($users->getLastName());?></td>
-	  <td><?php echo $this->escapeHtml($users->getGender());?></td>
-	  <td><?php echo $this->escapeHtml($users->getEmail());?></td>
-	  <td><?php echo $this->escapeHtml($users->getUserName());?></td>
-
-	  <td><?php echo $this->escapeHtml($users->getAdmin());?></td>
+	 <td><?php echo $this->escapeHtml($user->getFirstName());?></td>
+     <td><?php echo $this->escapeHtml($user->getLastName());?></td>
+	  <td><?php echo $this->escapeHtml($user->getGender());?></td>
+	  <td><?php echo $this->escapeHtml($user->getEmail());?></td>
+	  <td><?php echo $this->escapeHtml($user->getUserName());?></td>
+	  <td><?php echo $this->escapeHtml($user->getAdmin());?></td>
+	  <td>
+	  <?php 
+	  /*
+	  find the pair
+	  $tu = $objectManager->getRepository('Share\Entity\User')
+                 ->findOneBy(array('users_trusted' => $user,));
 	  
+	  echo $tu->getFirstName();
+	  */
+	  foreach ($user->getUsersTrusted() as $trusted_user) { 
+	    echo $trusted_user->getFirstName();
+	  }
+	  ?>
+	  </td>
 	  
      <td>
+         <?php if ($user->getId() == $me->getId()) { ?>
+		 <a href="<?php echo $this->url('users',
+             array('action'=>'edit', 'id' => $user->getId()));?>">Bearbeiten</a>
          <a href="<?php echo $this->url('users',
-             array('action'=>'edit', 'id' => $users->getId()));?>">Bearbeiten</a>
-			 <a href="<?php echo $this->url('users',
-             array('action'=>'trust', 'id' => $users->getId()));?>">als Freund hinzuf&uuml;gen</a>
-         <a href="<?php echo $this->url('users',
-             array('action'=>'delete', 'id' => $users->getId()));?>">L&ouml;schen</a>
+             array('action'=>'delete', 'id' => $user->getId()));?>">L&ouml;schen</a>
+		<?php } else { ?>
+			 <a href="<?php echo $this->url('users',	
+             array('action'=>'trust', 'id' => $user->getId()));?>">als Freund hinzuf&uuml;gen</a>
+         <?php } ?>
      </td>
  </tr>
  <?php endforeach; ?>
