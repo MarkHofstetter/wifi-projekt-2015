@@ -5,6 +5,7 @@ return array(
              'Share\Controller\User' => 'Share\Controller\UserController',
 			 'Share\Controller\Product' => 'Share\Controller\ProductController',
 			 'Share\Controller\Login' => 'Share\Controller\LoginController',
+			 'Share\Controller\Lend' => 'Share\Controller\LendController',
          ),
      ),
      'router' => array(
@@ -52,6 +53,22 @@ return array(
                      ),
                      'defaults' => array(
                          'controller' => 'Share\Controller\Login',
+                         'action'     => 'index',
+                     ),
+                 ),
+             ),
+			 
+			 
+			 'lend' => array(
+                 'type'    => 'segment',
+                 'options' => array(
+                     'route'    => '/share/lend[/][:action][/:id]',
+                     'constraints' => array(
+                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                         'id'     => '[0-9]+',
+                     ),
+                     'defaults' => array(
+                         'controller' => 'Share\Controller\Lend',
                          'action'     => 'index',
                      ),
                  ),

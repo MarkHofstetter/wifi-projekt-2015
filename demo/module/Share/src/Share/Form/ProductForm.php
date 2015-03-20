@@ -19,6 +19,16 @@
          ));
 		 
 		 
+		 
+		 $this->add(array(
+             'name' => 'owner',
+             'type' => 'Text',
+             'options' => array(
+                 'label' => 'Owner',
+             ),
+         ));
+		 
+		 
 		 $this->add(array(
              'name' => 'id',
              'type' => 'Hidden',
@@ -39,13 +49,7 @@
              ),
          ));
 		 
-		$this->add(array(
-             'name' => 'owner',
-             'type' => 'Text',
-             'options' => array(
-                 'label' => 'Owner',
-             ),
-         ));
+		
 		 
 		 $this->add(array(
              'name' => 'picture',

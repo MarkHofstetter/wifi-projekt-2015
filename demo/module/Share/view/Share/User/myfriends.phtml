@@ -1,0 +1,19 @@
+<?php
+
+ $title = 'Meine Freunde';
+ $this->headTitle($title);
+ ?>
+ <h2><?php echo $this->escapeHtml($title); ?></h2>
+ 
+ <br/> <br/>
+ <table class="table">
+ <tr>
+
+ <?php foreach ($users_trusted as $users_trusted) : ?>
+ <tr>
+     <td><?php echo $this->escapeHtml($users_trusted->getFirstName());?></td>
+	   <tr>
+
+ </tr>
+ <?php endforeach; ?>
+ </table>

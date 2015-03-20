@@ -62,6 +62,10 @@ class User {
 * @ORM\JoinTable(name="user_x_user")
  **/
 private $users_trusted;
+
+public function getUsersTrusted() {
+	 return $this->users_trusted;
+}
 public function __construct() {
   $this->users_trusted = new \Doctrine\Common\Collections\ArrayCollection();
   $this->users_that_trust_me = new \Doctrine\Common\Collections\ArrayCollection();

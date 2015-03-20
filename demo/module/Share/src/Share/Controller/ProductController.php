@@ -166,5 +166,41 @@ class ProductController extends ShareController
           'users_that_trust_me' => $users_that_trust_me,
         ));
 	
+	}
+	
+	public function tolendAction() 
+	{
+        ?>
+		<table class="table"><tr>
+		<?php
+        $users_that_trust_me = $this->user->getUsersThatTrustMe();
+       foreach ($users_that_trust_me as $user) 
+	   {
+			
+           echo '<td>Produkte von '.$user->getFirstName() .':</td><td></td><td></td></tr>';
+		   foreach ($user->getProductUsers() as $product) 
+		   {
+		      echo '<td></td><td>'.$product->getTitle().'</td>';
+			  ?>
+			  <td>
+			  <a href="<?php echo '../lend/add/'.$product->getId();?>">ausleihen</a>
+			  
+			  
+			  </td></tr>
+			 <?php
+
+		   }
+        }
+		
+        return new ViewModel(array(
+          'users_that_trust_me' => $users_that_trust_me,
+        ));
+		?>
+		<table>
+		<?php
     }
+	
+	
+	
+	
 }	

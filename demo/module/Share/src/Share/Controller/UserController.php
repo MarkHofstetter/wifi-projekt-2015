@@ -17,9 +17,10 @@ use Share\Form\TrustForm;
        $users = $objectManager->getRepository('Share\Entity\User')->findAll();
        return new ViewModel(array(
              'users' => $users,
-
-       ));
+			 ));
+	   
 	 }
+	 
 
      public function addAction()
      {
@@ -195,7 +196,23 @@ use Share\Form\TrustForm;
              'user' => $user     # view "delete.phtml" wird aufgerufen (deleteAction --> delete-view wird aufgerufen)
          );
      }
-
-
+	 
+	  public function myfriendsAction()
+    {
+        
+        $users_trusted = $this->user->getUsersTrusted();
+       foreach ($users_trusted as $user) 
+	   {
+          $user->getFirstName();
+		   
+        }
+		
+        return new ViewModel(array(
+          'users_trusted' => $users_trusted,
+        ));
+		
+		
+    
+    }
 
  }

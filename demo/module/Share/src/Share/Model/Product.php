@@ -43,7 +43,7 @@ class Product implements InputFilterAwareInterface
     public function exchangeArray($data)
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
-		$this->owner_id = (isset ($date['owner_id']))   ? $date['owner_id']   : null;
+		//$this->owner_id = (isset ($data['owner_id']))   ? $data['owner_id']   : null;
         $this->title = (isset($data['title'])) ? $data['title'] : null;
         $this->description  = (isset($data['description']))  ? $data['description']  : null;
 		$this->owner  = (isset($data['owner']))  ? $data['owner']  : null;
