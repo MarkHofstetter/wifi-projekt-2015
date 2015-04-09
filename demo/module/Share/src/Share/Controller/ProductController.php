@@ -102,6 +102,7 @@ class ProductController extends ShareController
              if ($form->isValid()) {
 				$data = $form->getData();
 				$objectManager->persist($data->getEntity());
+			
                 $objectManager->flush();
                 return $this->redirect()->toRoute('products');
              }
@@ -170,7 +171,6 @@ class ProductController extends ShareController
 	
 	public function tolendAction() 
 	{
-        
        $users_that_trust_me = $this->user->getUsersThatTrustMe();       
        return new ViewModel(array(
           'users_that_trust_me' => $users_that_trust_me,

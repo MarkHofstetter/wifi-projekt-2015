@@ -18,12 +18,30 @@ class LendController extends ShareController
                  'action' => 'tolend'
                ));
          }
-			 
-         $request = $this->getRequest();
-         if ($request->isPost()) {
-             $lend = new Lend();
-             $form->setInputFilter($lend->getInputFilter());		                  
 			
+			
+			 $product = $this->objectManager->find('Share\Entity\Product', $id);
+			 echo	$product->getTitle($product);
+			   ?>
+			  <br/>
+			 <?php
+			 $product->getOwner()->getId();
+			 $user = $this->objectManager->find('Share\Entity\User', $product->getOwner()->getId());		 
+			 echo	$user->getEmail($user);
+			  ?>
+			  <br/>
+			 <?php
+			//$user = $this->objectManager->find('Share\Entity\User', $session->user_id);
+			//echo	$user->getEmail($user);
+			 
+			 
+			 
+	
+			$request = $this->getRequest();
+			if ($request->isPost()) {
+             $lend = new Lend();
+			  
+             $form->setInputFilter($lend->getInputFilter());		                  
              $form->setData($request->getPost());
 			
              if ($form->isValid()) {
@@ -34,24 +52,29 @@ class LendController extends ShareController
                  $data = $form->getData();
                  $ae = new \Share\Entity\Lend();
 				 $ae->setLender($this->user);
-				 # $ae->setLendBegin($data['product_id']);
+				 
                  
 				 $ae->setLendBegin(\DateTime::createFromFormat('Y-m-d', $data['lend_begin']));
                  $ae->setLendEnd(\DateTime::createFromFormat('Y-m-d', $data['lend_end']));
 				 $product = $this->objectManager->find('Share\Entity\Product', $id);
-				 $ae->setProduct($product);
+				$ae->getProduct($product);
+				
 				
 				 # take user_id from the session and look up the user object by id				 
                  # $user = $objectManager->find('Share\Entity\User', $session->user_id);
-				 # as we need the user all the time we read it in the parent class
-        				 
+				 # as we need the user all the time we read it in the parent class	 
 				 # $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
-			
-
 				$this->objectManager->persist($ae);
-                $this->objectManager->flush();
-				
+                $this->objectManager->flush();			 
                
+			   
+			       $mail = new Zend_Mail('utf-8');
+					$mail->setBodyText($product->getTitle($product)." wurde verliehen");
+					$mail->setFrom('somebody@example.com', 'Ein Versender');
+					$mail->addTo($user->getEmail($user), 'Ein Empfänger');
+					$mail->setSubject('Share Verleihdaten');
+					$mail->send();
+			   
                 return $this->redirect()->toRoute('products');
              }
          }
@@ -61,7 +84,4 @@ class LendController extends ShareController
 		   );
 
      }
-
-    
-	
 }	

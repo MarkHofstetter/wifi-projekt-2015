@@ -13,22 +13,21 @@ class Lend implements InputFilterAwareInterface
     public $product_id;
 	public $lend_begin;
 	public $lend_end;
+	public $product;
 	protected $Entity;
 	protected $inputFilter;
 
-	/*function __construct($ae) 
+	function __construct($ae) 
 	{
 	  if (empty($ae)) {
 	     return;
 	  }	
-	  $this->id = $ae->getId();
-	  $this->lender_id = $ae->getLender();
+	  
 	  $this->product_id = $ae->getProduct();
-      $this->lend_begin = $ae->getLendBegin(); 
-	  $this->lend_end = $ae->getLendEnd();  
+     
 	  $this->Entity = $ae;
 	}
-	*/
+	
 	
 	function getEntity() {	   
 	   $this->Entity->setLender($this->lender);
@@ -43,7 +42,7 @@ class Lend implements InputFilterAwareInterface
     {
         $this->id     = (isset($data['id']))     ? $data['id']     : null;
 		$this->lender_id = (isset ($data['lender_id']))   ? $data['lender_id']   : null;
-		$this->product_id = (isset ($data['product_id']))   ? $date['product_id']   : null;
+		$this->product_id = (isset ($data['product_id']))   ? $data['product_id']   : null;
         $this->land_begin = (isset($data['lend_begin'])) ? $data['lend_begin'] : null;
         $this->land_end = (isset($data['lend_end'])) ? $data['lend_end'] : null;
     }

@@ -28,7 +28,16 @@
              'type' => 'Hidden',
          ));
 		 
-
+		
+		 
+	
+		$this->add(array(
+            'type' => 'Zend\Form\Element\Date',
+            'name' => 'lend_begin',
+            'options' => array(
+                'label' => 'von-datum'
+            )
+        ));
          
 		 $this->add(array(
             'type' => 'Zend\Form\Element\Date',
