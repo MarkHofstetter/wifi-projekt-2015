@@ -32,10 +32,9 @@ class LendController extends ShareController
 			 echo	$user->getEmail($user);
 			  ?>
 			  <br/>
-			 <?php
-			 $user2= $this->objectManager->find('Share\Entity\User', 3);
-			//$user2= $this->objectManager->find('Share\Entity\User', $session->user_id);
-			echo	$user2->getEmail($user2);
+			 <?php			
+			
+			echo	$this->user->getEmail($user2);
 			 
 			 
 			 
@@ -69,8 +68,8 @@ class LendController extends ShareController
 				 # $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
 				
 				
-				 $mail = new Zend_Mail();
-					$mail->setBodyText($product->getTitle($product)." wurde verliehen");
+				$mail = new \Zend\Mail\Message;
+				$mail->setBody($product->getTitle($product)." wurde verliehen");
 					$mail->setFrom($user2->getEmail($user2), 'Ein Versender');
 					$mail->addTo($user->getEmail($user), 'Ein Empfänger');
 					$mail->setSubject('Share Verleihdaten');
