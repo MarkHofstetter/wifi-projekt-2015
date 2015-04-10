@@ -15,7 +15,9 @@
 		   {
 		      echo '<td></td><td>'.$product->getTitle().'</td>';
 			  echo '<td></td><td>'.$product->getDescription().'</td>';
+			  //echo '<td></td><td>'.$product->getPicture().'</td>';
 			  ?>
+			  <td><img src='../images/<?php echo $product->getPicture();?>'></td>
 			  <td>
 			  <a href="<?php echo $this->url('lend',	
              array('action'=>'add', 'id' => $product->getId()));?>">ausleihen</a>

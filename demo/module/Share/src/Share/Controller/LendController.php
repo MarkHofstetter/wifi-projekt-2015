@@ -2,6 +2,7 @@
 namespace Share\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
+use Zend\Mail;
 use Share\Model\Lend;
 use Share\Form\LendForm;
 
@@ -19,20 +20,22 @@ class LendController extends ShareController
                ));
          }
 			
-			
+
 			 $product = $this->objectManager->find('Share\Entity\Product', $id);
 			 echo	$product->getTitle($product);
 			   ?>
 			  <br/>
 			 <?php
 			 $product->getOwner()->getId();
+			 
 			 $user = $this->objectManager->find('Share\Entity\User', $product->getOwner()->getId());		 
 			 echo	$user->getEmail($user);
 			  ?>
 			  <br/>
 			 <?php
-			//$user = $this->objectManager->find('Share\Entity\User', $session->user_id);
-			//echo	$user->getEmail($user);
+			 $user2= $this->objectManager->find('Share\Entity\User', 3);
+			//$user2= $this->objectManager->find('Share\Entity\User', $session->user_id);
+			echo	$user2->getEmail($user2);
 			 
 			 
 			 
@@ -64,16 +67,23 @@ class LendController extends ShareController
                  # $user = $objectManager->find('Share\Entity\User', $session->user_id);
 				 # as we need the user all the time we read it in the parent class	 
 				 # $ae->readowner_id($data['owner_id']); // read owner by id from doctrine
+				
+				
+				 $mail = new Zend_Mail();
+					$mail->setBodyText($product->getTitle($product)." wurde verliehen");
+					$mail->setFrom($user2->getEmail($user2), 'Ein Versender');
+					$mail->addTo($user->getEmail($user), 'Ein Empfänger');
+					$mail->setSubject('Share Verleihdaten');
+					$mail->send();
+				
+				
+				
+				
 				$this->objectManager->persist($ae);
                 $this->objectManager->flush();			 
                
 			   
-			       $mail = new Zend_Mail('utf-8');
-					$mail->setBodyText($product->getTitle($product)." wurde verliehen");
-					$mail->setFrom('somebody@example.com', 'Ein Versender');
-					$mail->addTo($user->getEmail($user), 'Ein Empfänger');
-					$mail->setSubject('Share Verleihdaten');
-					$mail->send();
+			      
 			   
                 return $this->redirect()->toRoute('products');
              }
